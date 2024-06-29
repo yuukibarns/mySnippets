@@ -8,7 +8,7 @@ Example (with [lazy.nvim][lazy]):
 {
     "L3MON4D3/LuaSnip",
     dependencies = {
-        "jzr/mySnippets/snippets",
+        "yuukkibarns/mySnippets/snippets",
         config = true,
     },
     config = function()
@@ -20,8 +20,6 @@ Example (with [lazy.nvim][lazy]):
     end,
 }
 ```
-
-## mathematics
 
 ## Acknowledgements
 
