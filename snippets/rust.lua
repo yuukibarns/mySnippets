@@ -5,7 +5,7 @@ snips = {
 		trig = "io",
 		name = "read_line",
 		desc = "io::stdin().read_line(&mut <>).expect();",
-	}, fmta([[io::stdin().read_line(&mut <>).expect("Failed to read line!");]], { i(1), i(0) })),
+	}, fmta([[io::stdin().read_line(&mut <>).expect("Failed to read line!");]], { i(0) })),
 
 	s({
 		trig = "tr",
