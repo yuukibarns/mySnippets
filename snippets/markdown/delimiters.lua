@@ -6,6 +6,7 @@ local brackets = {
 	a = { "\\langle ", "\\rangle" },
 	b = { "[", "]" },
 	c = { "\\{", "\\}" },
+	e = { "\\lceil", "\\rceil" },
 	m = { "|", "|" },
 	n = { "\\|", "\\|" },
 	p = { "(", ")" },
@@ -24,7 +25,7 @@ end
 autosnips = {
 	s(
 		{
-			trig = "([l.])([r.])([abcmnpgh])",
+			trig = "([l.])([r.])([abcemnpgh])",
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,
