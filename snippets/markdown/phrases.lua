@@ -46,81 +46,81 @@ snips = {
 }
 
 autosnips = {
-	s(
-		{
-			trig = ";'",
-			wordTrig = false,
-			name = "Poincar_e",
-			desc = "Poincar_e",
-		},
-		fmta(
-			[[
-			$\'{<>}<>$
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";.",
-			wordTrig = false,
-			name = "H_older",
-			desc = "H_older",
-		},
-		fmta(
-			[[
-			$\"{<>}<>$
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";,",
-			wordTrig = false,
-			name = "Ces_aro",
-			desc = "Ces_aro",
-		},
-		fmta(
-			[[
-			 $\`{<>}<>$
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";/",
-			wordTrig = false,
-			name = "Erd_os",
-			desc = "Erd_os",
-		},
-		fmta(
-			[[
-			 $\H{<>}<>$
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";o",
-			wordTrig = false,
-			name = "()",
-			desc = "parentheses",
-		},
-		fmta(
-			[[
-			(<>)<>
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
+	-- s(
+	-- 	{
+	-- 		trig = ";'",
+	-- 		wordTrig = false,
+	-- 		name = "Poincar_e",
+	-- 		desc = "Poincar_e",
+	-- 	},
+	-- 	fmta(
+	-- 		[[
+	-- 		$\'{<>}<>$
+	-- 		]],
+	-- 		{ i(1), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
+	-- s(
+	-- 	{
+	-- 		trig = ";.",
+	-- 		wordTrig = false,
+	-- 		name = "H_older",
+	-- 		desc = "H_older",
+	-- 	},
+	-- 	fmta(
+	-- 		[[
+	-- 		$\"{<>}<>$
+	-- 		]],
+	-- 		{ i(1), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
+	-- s(
+	-- 	{
+	-- 		trig = ";,",
+	-- 		wordTrig = false,
+	-- 		name = "Ces_aro",
+	-- 		desc = "Ces_aro",
+	-- 	},
+	-- 	fmta(
+	-- 		[[
+	-- 		 $\`{<>}<>$
+	-- 		]],
+	-- 		{ i(1), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
+	-- s(
+	-- 	{
+	-- 		trig = ";/",
+	-- 		wordTrig = false,
+	-- 		name = "Erd_os",
+	-- 		desc = "Erd_os",
+	-- 	},
+	-- 	fmta(
+	-- 		[[
+	-- 		 $\H{<>}<>$
+	-- 		]],
+	-- 		{ i(1), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
+	-- s(
+	-- 	{
+	-- 		trig = ";o",
+	-- 		wordTrig = false,
+	-- 		name = "()",
+	-- 		desc = "parentheses",
+	-- 	},
+	-- 	fmta(
+	-- 		[[
+	-- 		(<>)<>
+	-- 		]],
+	-- 		{ i(1), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
 	s(
 		{
 			trig = "([acC])ref",
@@ -138,21 +138,21 @@ autosnips = {
 		opts
 	),
 
-	s(
-		{ trig = "eqref", desc = "add a reference with eqref", regTrig = true, hidden = true },
-		fmta([[\eqref{eq:<>}<>]], { i(1), i(0) }),
-		{
-			condition = tex.in_text,
-			show_condition = tex.in_text,
-			callbacks = {
-				[1] = {
-					[events.enter] = function()
-						require("cmp").complete()
-					end,
-				},
-			},
-		}
-	),
+	-- s(
+	-- 	{ trig = "eqref", desc = "add a reference with eqref", regTrig = true, hidden = true },
+	-- 	fmta([[\eqref{eq:<>}<>]], { i(1), i(0) }),
+	-- 	{
+	-- 		condition = tex.in_text,
+	-- 		show_condition = tex.in_text,
+	-- 		callbacks = {
+	-- 			[1] = {
+	-- 				[events.enter] = function()
+	-- 					require("cmp").complete()
+	-- 				end,
+	-- 			},
+	-- 		},
+	-- 	}
+	-- ),
 
 	s({
 		trig = "Tfae",
