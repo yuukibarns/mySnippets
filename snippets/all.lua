@@ -1,15 +1,5 @@
 local username = "yuukibarns"
 
--- --- Get the comment string { beg,end } table
--- ---@param ctype integer 1 for `line`-comment and 2 for `block`-comment
--- ---@return table comment_strings { begcstring, endcstring }
--- local function get_cstring(ctype)
--- 	local range = require("Comment.utils").get_region()
--- 	local cstring = require("Comment.ft").calculate({ ctype = ctype, range = range }) or vim.bo.commentstring
--- 	local left, right = require("Comment.utils").unwrap_cstr(cstring)
--- 	return { left, right }
--- end
-
 --- Options for marks to be used in a TODO comment
 local marks = {
 	signature = function()
@@ -35,9 +25,9 @@ local function todo_snippet_nodes(aliases)
 		table.insert(sigmark_nodes, mark())
 	end
 	-- format them into the actual snippet
-	local comment_node = fmt("{} {}: {} {} {}{}", {
+	local comment_node = fmt("{} {}: {} {} {}", {
 		f(function()
-			return vim.bo.commentstring:gsub("%s*%%s$", "") -- get <comment-string[1]>
+			return vim.bo.commentstring:gsub("%s*%%s$", "")
 		end),
 		c(1, aliases_nodes), -- [name-of-comment]
 		i(3), -- {comment-text}
