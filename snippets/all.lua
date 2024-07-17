@@ -1,14 +1,14 @@
-local username = "JZR"
+local username = "yuukibarns"
 
---- Get the comment string { beg,end } table
----@param ctype integer 1 for `line`-comment and 2 for `block`-comment
----@return table comment_strings { begcstring, endcstring }
-local function get_cstring(ctype)
-	local range = require("Comment.utils").get_region()
-	local cstring = require("Comment.ft").calculate({ ctype = ctype, range = range }) or vim.bo.commentstring
-	local left, right = require("Comment.utils").unwrap_cstr(cstring)
-	return { left, right }
-end
+-- --- Get the comment string { beg,end } table
+-- ---@param ctype integer 1 for `line`-comment and 2 for `block`-comment
+-- ---@return table comment_strings { begcstring, endcstring }
+-- local function get_cstring(ctype)
+-- 	local range = require("Comment.utils").get_region()
+-- 	local cstring = require("Comment.ft").calculate({ ctype = ctype, range = range }) or vim.bo.commentstring
+-- 	local left, right = require("Comment.utils").unwrap_cstr(cstring)
+-- 	return { left, right }
+-- end
 
 --- Options for marks to be used in a TODO comment
 local marks = {
@@ -26,7 +26,7 @@ local marks = {
 	end,
 }
 
-local function todo_snippet_nodes(aliases, opts)
+local function todo_snippet_nodes(aliases)
 	local aliases_nodes = vim.tbl_map(function(alias)
 		return i(nil, alias) -- generate choices for [name-of-comment]
 	end, aliases)
@@ -37,14 +37,11 @@ local function todo_snippet_nodes(aliases, opts)
 	-- format them into the actual snippet
 	local comment_node = fmt("{} {}: {} {} {}{}", {
 		f(function()
-			return get_cstring(opts.ctype)[1] -- get <comment-string[1]>
+			return vim.bo.commentstring:gsub("%s*%%s$", "") -- get <comment-string[1]>
 		end),
 		c(1, aliases_nodes), -- [name-of-comment]
 		i(3), -- {comment-text}
 		c(2, sigmark_nodes), -- [comment-mark]
-		f(function()
-			return get_cstring(opts.ctype)[2] -- get <comment-string[2]>
-		end),
 		i(0),
 	})
 	return comment_node
@@ -53,11 +50,7 @@ end
 --- Generate a TODO comment snippet with an automatic description and docstring
 ---@param trig string
 ---@param aliases string[] of aliases for the todo comment (ex.: {FIX, ISSUE, FIXIT, BUG})
----@param opts table merged with the snippet opts table
-local function todo_snippet(trig, aliases, opts)
-	opts = opts or {}
-	opts.ctype = opts.ctype or 1
-
+local function todo_snippet(trig, aliases)
 	local alias_string = table.concat(aliases, "|")
 
 	local context = {
@@ -65,9 +58,9 @@ local function todo_snippet(trig, aliases, opts)
 		name = alias_string .. " comment",
 		desc = alias_string .. " comment with a signature-mark",
 	}
-	local comment_node = todo_snippet_nodes(aliases, opts)
+	local comment_node = todo_snippet_nodes(aliases)
 
-	return s(context, comment_node, opts)
+	return s(context, comment_node, {})
 end
 
 local base_specs = {
@@ -79,15 +72,10 @@ local base_specs = {
 	note = { "NOTE", "INFO" },
 }
 
-local todo_snippet_specs = {}
-for k, v in pairs(base_specs) do
-	todo_snippet_specs[k] = { v }
-	todo_snippet_specs[k .. "b"] = { v, { ctype = 2 } }
-end
-
 local todo_comment_snippets = {}
-for k, v in pairs(todo_snippet_specs) do
-	table.insert(todo_comment_snippets, todo_snippet(k, v[1], v[2]))
+
+for k, v in pairs(base_specs) do
+	table.insert(todo_comment_snippets, todo_snippet(k, v))
 end
 
 return todo_comment_snippets
