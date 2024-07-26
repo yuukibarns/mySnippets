@@ -34,6 +34,7 @@ end
 local function single_command_snippet(context, cmd, ext)
 	context.desc = context.desc or cmd
 	context.name = context.name or context.desc
+	context.hidden = true
 	local docstring, offset, cnode, lnode
 	if ext.choice == true then
 		docstring = "[" .. [[(<1>)?]] .. "]" .. [[{]] .. [[<2>]] .. [[}]] .. [[<0>]]
