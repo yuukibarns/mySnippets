@@ -2,14 +2,13 @@ local autosnips = {}
 local snips = {}
 local tex = require("mySnippets.markdown")
 
-local opts = { condition = tex.in_math }
+local opts = { condition = tex.in_math, show_condition = tex.in_math }
 
 local function symbol_snippet(context, cmd)
 	context.desc = cmd
 	context.name = context.name or cmd:gsub([[\]], "")
 	context.docstring = cmd .. [[{0}]]
 	context.wordTrig = false
-	context.hidden = true
 	return s(context, t(cmd), opts)
 end
 
@@ -18,8 +17,11 @@ local function symbol_snippet2(context, cmd)
 	context.name = context.name or cmd:gsub([[\]], "")
 	context.docstring = cmd .. [[{0}]]
 	context.wordTrig = true
-	context.hidden = true
-	return s(context, fmta([[<><><>]], { t("$"), t(cmd), t("$") }), { condition = tex.in_text })
+	return s(
+		context,
+		fmta([[<><><>]], { t("$"), t(cmd), t("$") }),
+		{ condition = tex.in_text, show_condition = tex.in_text }
+	)
 end
 
 local function symbol_snippet_w(context, cmd)
@@ -27,14 +29,12 @@ local function symbol_snippet_w(context, cmd)
 	context.name = context.name or cmd:gsub([[\]], "")
 	context.docstring = cmd .. [[{0}]]
 	context.wordTrig = true
-	context.hidden = true
 	return s(context, t(cmd), opts)
 end
 
 local function single_command_snippet(context, cmd, ext)
 	context.desc = context.desc or cmd
 	context.name = context.name or context.desc
-	context.hidden = true
 	local docstring, offset, cnode, lnode
 	if ext.choice == true then
 		docstring = "[" .. [[(<1>)?]] .. "]" .. [[{]] .. [[<2>]] .. [[}]] .. [[<0>]]
@@ -88,13 +88,13 @@ autosnips = {
 	}, opts),
 
 	s(
-		{ trig = "set", name = "set", desc = "set", hidden = true },
+		{ trig = "set", name = "set", desc = "set" },
 		fmta([[\{<>\}<>]], { c(1, { r(1, ""), sn(nil, { r(1, ""), t(" \\mid "), i(2) }) }), i(0) }),
 		opts
 	),
 
 	s(
-		{ trig = "Set", name = "Set", desc = "big set", hidden = true },
+		{ trig = "Set", name = "Set", desc = "big set" },
 		fmta([[\left\{<>\right\}<>]], { c(1, { r(1, ""), sn(nil, { r(1, ""), t(" \\ \\bigg|\\ "), i(2) }) }), i(0) }),
 		opts
 	),
@@ -104,7 +104,7 @@ autosnips = {
 	-- s({ trig = "|>", name = "triangleright |>", wordTrig = false, hidden = true }, { t("\\triangleright ") }, opts),
 
 	s(
-		{ trig = "([QRNZ])P", name = "positive", wordTrig = true, regTrig = true, hidden = true },
+		{ trig = "([QRNZ])P", name = "positive", wordTrig = true, regTrig = true },
 		{ f(function(_, snip)
 			return "\\mathbb{" .. snip.captures[1] .. "}^{+}"
 		end, {}) },
@@ -112,7 +112,7 @@ autosnips = {
 	),
 
 	s(
-		{ trig = "([QRZ])N", name = "negative", wordTrig = true, regTrig = true, hidden = true },
+		{ trig = "([QRZ])N", name = "negative", wordTrig = true, regTrig = true },
 		{ f(function(_, snip)
 			return "\\mathbb{" .. snip.captures[1] .. "}^{-}"
 		end, {}) },
@@ -132,12 +132,12 @@ autosnips = {
 
 	s({ trig = "&&", name = "align", wordTrig = false, hidden = true }, { t("& \\ ") }, { condition = tex.in_math }),
 
-	s({ trig = "'([mnkij])", name = "mnkji derivatives", wordTrig = false, regTrig = true, hidden = true }, {
+	s({ trig = "'([mnkij])", name = "mnkji derivatives", wordTrig = false, regTrig = true }, {
 		f(function(_, snip)
 			return "^{(" .. snip.captures[1] .. ")}"
 		end, {}),
 	}, opts),
-	s({ trig = "'(%d)", name = "number derivatives", wordTrig = false, regTrig = true, hidden = true }, {
+	s({ trig = "'(%d)", name = "number derivatives", wordTrig = false, regTrig = true }, {
 		f(function(_, snip)
 			return "^{(" .. snip.captures[1] .. ")}"
 		end, {}),
