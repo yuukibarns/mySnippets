@@ -34,16 +34,16 @@ autosnips = {
 	-- 	opts
 	-- ),
 
-	s(
-		{ trig = "dfu", name = "deffunction", desc = "def+function." },
-		fmta([[\colon <>]], {
-			c(1, {
-				fmta([[<> \to <>]], { i(1), i(0) }),
-				fmta([[<> \longrightarrow <>]], { i(1), i(0) }),
-			}),
-		}),
-		opts
-	),
+	-- s(
+	-- 	{ trig = "dfu", name = "deffunction", desc = "def+function." },
+	-- 	fmta([[\colon <>]], {
+	-- 		c(1, {
+	-- 			fmta([[<> \to <>]], { i(1), i(0) }),
+	-- 			fmta([[<> \longrightarrow <>]], { i(1), i(0) }),
+	-- 		}),
+	-- 	}),
+	-- 	opts
+	-- ),
 
 	s(
 		{ trig = "xra", name = "xrightarrow", desc = "xrightarrow." },
@@ -70,7 +70,7 @@ autosnips = {
 
 	s({ trig = "\\|Ln", name = "L norms", desc = "L norms." }, fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }), opts),
 
-	s({ trig = "mod", name = "modulo", desc = "= (mod I)." }, fmta([[\ (\text{mod}\ <>)]], { i(1) }), opts),
+	s({ trig = "mod", name = "modulo", desc = "= (mod I)." }, fmta([[\ (\mathrm{mod}\ <>)]], { i(1) }), opts),
 
 	-- fractions
 	s(
