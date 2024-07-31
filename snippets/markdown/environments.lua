@@ -48,8 +48,8 @@ snips = {
 			name = "[bBpvVa]matrix",
 			desc = "matrices",
 			regTrig = true,
-			hidden = true,
 			condition = tex.in_math,
+			show_condition = tex.in_math,
 		},
 		fmta(
 			[[

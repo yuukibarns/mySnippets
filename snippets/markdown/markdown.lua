@@ -57,7 +57,8 @@ snips = {
 
 	s(
 		{ trig = "link", name = "Markdown Links", desc = "Insert a Link" },
-		fmt([[[{}]({})]], { i(1, "title"), i(2, "url") })
+		fmt([[[{}]({})]], { i(1, "title"), i(2, "url") }),
+		opts
 	),
 }
 

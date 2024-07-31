@@ -127,7 +127,6 @@ autosnips = {
 			name = "(acC)?ref",
 			desc = "add a reference (with autoref, cref)",
 			regTrig = true,
-			hidden = true,
 		},
 		fmta(
 			[[\<>ref{<>}<>]],

@@ -23,19 +23,19 @@ end
 autosnips = {
 	--After having learned differential forms, I think "\," is not necessary.
 	s(
-		{ trig = "dint", name = "integral", desc = "Insert integral notation.", hidden = true },
+		{ trig = "dint", name = "integral", desc = "Insert integral notation." },
 		fmta([[\int_{<>}^{<>}<>]], { i(1, "-\\infty"), i(2, "\\infty"), i(0) }),
 		opts
 	),
 
-	s(
-		{ trig = "fint", name = "integral", desc = "Insert integral notation.", hidden = true },
-		fmta([[\int_{<>}<>]], { i(1), i(0) }),
-		opts
-	),
+	-- s(
+	-- 	{ trig = "fint", name = "integral", desc = "Insert integral notation." },
+	-- 	fmta([[\int_{<>}<>]], { i(1), i(0) }),
+	-- 	opts
+	-- ),
 
 	s(
-		{ trig = "dfu", name = "deffunction", desc = "def+function.", hidden = true },
+		{ trig = "dfu", name = "deffunction", desc = "def+function." },
 		fmta([[\colon <>]], {
 			c(1, {
 				fmta([[<> \to <>]], { i(1), i(0) }),
@@ -46,39 +46,31 @@ autosnips = {
 	),
 
 	s(
-		{ trig = "xra", name = "xrightarrow", desc = "xrightarrow.", hidden = true },
+		{ trig = "xra", name = "xrightarrow", desc = "xrightarrow." },
 		fmta([[\xlongrightarrow{<>}<>]], { i(1), i(0) }),
 		opts
 	),
 	s(
-		{ trig = "xla", name = "xleftarrow", desc = "xleftarrow.", hidden = true },
+		{ trig = "xla", name = "xleftarrow", desc = "xleftarrow." },
 		fmta([[\xlongleftarrow{<>}<>]], { i(1), i(0) }),
 		opts
 	),
 
 	s(
-		{ trig = "dyd", name = "dy/dx", desc = "dy/dx.", hidden = true },
+		{ trig = "dyd", name = "dy/dx", desc = "dy/dx." },
 		fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}<>]], { i(1), i(2), i(0) }),
 		opts
 	),
 
 	s(
-		{ trig = "dyp", name = "py/px", desc = "py/px.", hidden = true },
+		{ trig = "dyp", name = "py/px", desc = "py/px." },
 		fmta([[\frac{\partial<>}{\partial<>}<>]], { i(1), i(2), i(0) }),
 		opts
 	),
 
-	s(
-		{ trig = "\\|Ln", name = "L norms", desc = "L norms.", wordTrig = true, hidden = true },
-		fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }),
-		opts
-	),
+	s({ trig = "\\|Ln", name = "L norms", desc = "L norms." }, fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }), opts),
 
-	s(
-		{ trig = "mod", name = "modulo", desc = "= (mod I).", wordTrig = true, hidden = true },
-		fmta([[\ (\text{mod}\ <>)]], { i(1) }),
-		opts
-	),
+	s({ trig = "mod", name = "modulo", desc = "= (mod I)." }, fmta([[\ (\text{mod}\ <>)]], { i(1) }), opts),
 
 	-- fractions
 	s(
@@ -88,7 +80,7 @@ autosnips = {
 	),
 
 	s(
-		{ trig = "(%w)//", name = "fraction", desc = "auto fraction", regTrig = true, hidden = true },
+		{ trig = "(%w)//", name = "fraction", desc = "auto fraction", regTrig = true },
 		fmta([[\frac{<>}{<>}<>]], { f(function(_, snip)
 			return snip.captures[1]
 		end), i(1), i(0) }),

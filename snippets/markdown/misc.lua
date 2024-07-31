@@ -37,7 +37,6 @@ autosnips = {
 		name = "inline math",
 		desc = "Insert inline Math Environment.",
 		hidden = true,
-		condition = tex.in_text,
 	}, fmt([[${}${}]], { i(1), i(0) }), opts),
 
 	s(
@@ -45,6 +44,7 @@ autosnips = {
 			trig = "dm",
 			name = "dispaly math",
 			desc = "Insert display Math Environment.",
+			hidden = true,
 		},
 		fmt(
 			[[
