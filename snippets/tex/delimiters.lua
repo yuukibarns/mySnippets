@@ -1,6 +1,6 @@
 local autosnips = {}
 
-local conds_expand = require("luasnip.extras.conditions.expand")
+-- local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("mySnippets.latex")
 
 local brackets = {
@@ -63,7 +63,6 @@ autosnips = {
 			name = "parentheses",
 			desc = "parenthese delimiter",
 			regTrig = true,
-			hidden = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
@@ -81,7 +80,6 @@ autosnips = {
 			name = "brackets",
 			desc = "bracket delimiter",
 			regTrig = true,
-			hidden = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
@@ -99,7 +97,6 @@ autosnips = {
 			name = "angles",
 			desc = "angle delimiter",
 			regTrig = true,
-			hidden = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
@@ -117,14 +114,13 @@ autosnips = {
 			name = "norm",
 			desc = "norm delimiter",
 			regTrig = true,
-			hidden = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
-			| <> |<>
+			|<>|<>
 			]],
 			{ i(1), i(0) }
 		)
@@ -135,14 +131,13 @@ autosnips = {
 			name = "Norm",
 			desc = "Norm delimiter",
 			regTrig = true,
-			hidden = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
-			\| <> \|<>
+			\|<>\|<>
 			]],
 			{ i(1), i(0) }
 		)

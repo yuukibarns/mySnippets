@@ -3,7 +3,7 @@ local autosnips = {}
 local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("mySnippets.latex")
 
-local opts = { condition = tex.in_text }
+-- local opts = { condition = tex.in_text }
 local opts2 = { condition = tex.in_text * conds_expand.line_begin }
 
 local function appended_space_after_insert()
@@ -19,23 +19,22 @@ local function appended_space_after_insert()
 	})
 end
 
-local function surroundWithInlineMath(prefix, content, suffix)
-	return prefix .. "\\(" .. content .. "\\)" .. suffix
-end
+-- local function surroundWithInlineMath(prefix, content, suffix)
+-- 	return prefix .. "\\(" .. content .. "\\)" .. suffix
+-- end
 
 autosnips = {
-	s({
-		trig = "(%s)([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+",
-		name = "single-letter variable",
-		wordTrig = false,
-		regTrig = true,
-		hidden = true,
-	}, {
-		f(function(_, snip)
-			return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
-		end, {}),
-	}, opts),
-
+	-- s({
+	-- 	trig = "(%s)([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+",
+	-- 	name = "single-letter variable",
+	-- 	wordTrig = false,
+	-- 	regTrig = true,
+	-- 	hidden = true,
+	-- }, {
+	-- 	f(function(_, snip)
+	-- 		return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
+	-- 	end, {}),
+	-- }, opts),
 	-- s({
 	-- 	trig = "(%s)([0-9]+[a-zA-Z]+)([,;.%)]?)%s+",
 	-- 	name = "surround word starting with number",
@@ -59,7 +58,6 @@ autosnips = {
 	-- 		return surroundWithInlineMath(snip.captures[1], snip.captures[2], snip.captures[3])
 	-- 	end, {}),
 	-- }, opts),
-
 	s(
 		{
 			trig = "mk",
@@ -68,7 +66,7 @@ autosnips = {
 			hidden = true,
 			condition = tex.in_text,
 		},
-		fmt([[\( {} \){}]], { i(1), i(0) }),
+		fmt([[\({}\){}]], { i(1), i(0) }),
 		{
 			callbacks = {
 				[-1] = {
@@ -85,7 +83,7 @@ autosnips = {
 		},
 		fmt(
 			[[
-			\[ {} \]
+			\[{}\]
 			]],
 			{ i(0) }
 		),

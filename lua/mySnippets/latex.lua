@@ -24,24 +24,6 @@ local BULLET_ENVS = {
 	enumerate = true,
 }
 
--- ---Check if cursor is in treesitter node of 'math_environment': 'tikzcd'
--- ---@return boolean
--- local function in_tikzcd()
--- 	local node = vim.treesitter.get_node()
--- 	while node do
--- 		if node:type() == "generic_environment" then
--- 			local begin = node:child(0)
--- 			local names = begin and begin:field("name")
---
--- 			if names and names[1] and get_node_text(names[1], 0) == "tikzcd" then
--- 				return true
--- 			end
--- 		end
--- 		node = node:parent()
--- 	end
--- 	return false
--- end
-
 ---Check if cursor is in treesitter node of 'math'
 ---@return boolean
 local function in_math()
@@ -97,27 +79,9 @@ local function in_bullets()
 	return false
 end
 
--- ---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
--- ---@return boolean
--- local function in_xymatrix()
--- 	local node = vim.treesitter.get_node()
--- 	while node do
--- 		if node:type() == "generic_command" then
--- 			local names = node:child(0)
--- 			if names and get_node_text(names, 0) == "\\xymatrix" then
--- 				return true
--- 			end
--- 		end
--- 		node = node:parent()
--- 	end
--- 	return false
--- end
-
---M.in_tikzcd = cond_obj.make_condition(in_tikzcd)
 M.in_math = cond_obj.make_condition(in_math)
 M.in_text = cond_obj.make_condition(in_text)
 M.in_align = cond_obj.make_condition(in_align)
 M.in_bullets = cond_obj.make_condition(in_bullets)
---M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
 
 return M

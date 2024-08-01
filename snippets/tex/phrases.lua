@@ -46,8 +46,6 @@ snips = {
 }
 
 autosnips = {
-	--s({ trig = "qf", name = "Q-factorial" }, { t("\\(\\mathbb{Q}\\)-factorial") }, opts),
-	--s({ trig = "bqf", name = "base point free" }, { t("base point free") }, opts),
 	s(
 		{
 			trig = ";'",
@@ -117,7 +115,7 @@ autosnips = {
 		},
 		fmta(
 			[[
-			 `` <> ''<>
+			 ``<>''<>
 			]],
 			{ i(1), i(0) }
 		),
@@ -153,28 +151,12 @@ autosnips = {
 		),
 		opts
 	),
-	-- s(
-	-- 	{
-	-- 		trig = ";9",
-	-- 		wordTrig = false,
-	-- 		name = "[]",
-	-- 		desc = "brackets(math_inline)",
-	-- 	},
-	-- 	fmta(
-	-- 		[[
-	-- 		$[<>]$<>
-	-- 		]],
-	-- 		{ i(1), i(0) }
-	-- 	),
-	-- 	opts
-	-- ),
 	s(
 		{
 			trig = "([acC])ref",
 			name = "(acC)?ref",
 			desc = "add a reference (with autoref, cref)",
 			regTrig = true,
-			hidden = true,
 		},
 		fmta(
 			[[\<>ref{<>}<>]],
@@ -184,7 +166,6 @@ autosnips = {
 		),
 		opts
 	),
-
 	s(
 		{ trig = "eqref", desc = "add a reference with eqref", regTrig = true, hidden = true },
 		fmta([[\eqref{eq:<>}<>]], { i(1), i(0) }),
@@ -200,12 +181,10 @@ autosnips = {
 			},
 		}
 	),
-
 	s({
 		trig = "Tfae",
 		name = "The following are equivalent",
 	}, { t("The following are equivalent") }, opts2),
-
 	s({
 		trig = "([wW])log",
 		name = "without loss of generality",
@@ -215,17 +194,6 @@ autosnips = {
 			return snip.captures[1] .. "ithout loss of generality"
 		end, {}),
 	}, opts2),
-
-	--	s({ trig = "([qr])c", name = "Cartier", regTrig = true }, {
-	--		f(function(_, snip)
-	--			return "\\(\\mathbb{" .. string.upper(snip.captures[1]) .. "}\\)-Cartier"
-	--		end, {}),
-	--	}, opts),
-	--	s({ trig = "([qr])d", name = "divisor", regTrig = true }, {
-	--		f(function(_, snip)
-	--			return "\\(\\mathbb{" .. string.upper(snip.captures[1]) .. "}\\)-divisor"
-	--		end, {}),
-	--	}, opts),
 }
 
 local phrase_specs = {
@@ -239,8 +207,7 @@ local auto_phrase_specs = {
 	egg = "e.g., ",
 	stt = "such that",
 	--resp = "resp.\\ ",
-	--	nc = "\\((-1)\\)-curve",
-	--iff = "$\\iff$",
+	iff = "\\(\\iff\\)",
 	wrt = "with respect to ",
 	nbhd = "neighbourhood",
 	tfae = "the following are equivalent",
