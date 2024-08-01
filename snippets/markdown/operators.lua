@@ -47,14 +47,10 @@ autosnips = {
 
 	s(
 		{ trig = "xra", name = "xrightarrow", desc = "xrightarrow." },
-		fmta([[\xlongrightarrow{<>}<>]], { i(1), i(0) }),
+		fmta([[\xrightarrow{<>}<>]], { i(1), i(0) }),
 		opts
 	),
-	s(
-		{ trig = "xla", name = "xleftarrow", desc = "xleftarrow." },
-		fmta([[\xlongleftarrow{<>}<>]], { i(1), i(0) }),
-		opts
-	),
+	s({ trig = "xla", name = "xleftarrow", desc = "xleftarrow." }, fmta([[\xleftarrow{<>}<>]], { i(1), i(0) }), opts),
 
 	s(
 		{ trig = "dyd", name = "dy/dx", desc = "dy/dx." },
