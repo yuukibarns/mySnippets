@@ -19,6 +19,25 @@ local function sec_snippet(trig, env)
 		context,
 		fmta(
 			[[
+			\<>{<>}
+			<>
+			]],
+			{ t(env), i(1), i(0) }
+		),
+		opts
+	)
+end
+
+local function labeled_sec_snippet(trig, env)
+	local context = {
+		trig = "l" .. trig,
+		name = trig,
+		desc = trig .. " Environment",
+	}
+	return s(
+		context,
+		fmta(
+			[[
 			\<>{<>}\label{<>:<>}
 			<>
 			]],
@@ -39,6 +58,10 @@ local sec_specs = {
 
 for k, v in pairs(sec_specs) do
 	table.insert(snips, sec_snippet(k, v))
+end
+
+for k, v in pairs(sec_specs) do
+	table.insert(snips, labeled_sec_snippet(k, v))
 end
 
 return nil, snips

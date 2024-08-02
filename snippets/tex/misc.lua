@@ -6,18 +6,18 @@ local tex = require("mySnippets.latex")
 -- local opts = { condition = tex.in_text }
 local opts2 = { condition = tex.in_text * conds_expand.line_begin }
 
-local function appended_space_after_insert()
-	vim.api.nvim_create_autocmd("InsertCharPre", {
-		callback = function()
-			if string.find(vim.v.char, "%a") then
-				vim.v.char = " " .. vim.v.char
-			end
-		end,
-		buffer = 0,
-		once = true,
-		desc = "Auto Add a Space after Inline Math",
-	})
-end
+-- local function appended_space_after_insert()
+-- 	vim.api.nvim_create_autocmd("InsertCharPre", {
+-- 		callback = function()
+-- 			if string.find(vim.v.char, "%a") then
+-- 				vim.v.char = " " .. vim.v.char
+-- 			end
+-- 		end,
+-- 		buffer = 0,
+-- 		once = true,
+-- 		desc = "Auto Add a Space after Inline Math",
+-- 	})
+-- end
 
 -- local function surroundWithInlineMath(prefix, content, suffix)
 -- 	return prefix .. "\\(" .. content .. "\\)" .. suffix
@@ -66,14 +66,14 @@ autosnips = {
 			hidden = true,
 			condition = tex.in_text,
 		},
-		fmt([[\({}\){}]], { i(1), i(0) }),
-		{
-			callbacks = {
-				[-1] = {
-					[events.leave] = appended_space_after_insert,
-				},
-			},
-		}
+		fmt([[\({}\){}]], { i(1), i(0) })
+		-- {
+		-- 	callbacks = {
+		-- 		[-1] = {
+		-- 			[events.leave] = appended_space_after_insert,
+		-- 		},
+		-- 	},
+		-- }
 	),
 	s(
 		{

@@ -67,7 +67,7 @@ autosnips = {
 		fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }),
 		opts
 	),
-	s({ trig = "mod", name = "modula", desc = "= (mod I)." }, fmta([[\ (\text{mod}\ <>)]], { i(1) }), opts),
+	s({ trig = "mod", name = "modula", desc = "= (mod I)." }, fmta([[\ (\mathrm{mod}\ <>)]], { i(1) }), opts),
 	-- fractions
 	s(
 		{ trig = "//", name = "fraction", desc = "fraction (general)" },
@@ -118,8 +118,6 @@ local sequence_specs = {
 }
 
 local operator_specs = {
-	--"cod",
-	--"coker",
 	"int",
 	"arcsin",
 	"sin",
@@ -136,15 +134,15 @@ local operator_specs = {
 	"det",
 	"dim",
 	"exp",
-	--"hom",
+	"hom",
 	"inf",
 	"sup",
 	"ker",
 	"max",
 	"min",
 	"lim",
-	-- "perp",
-	-- "star",
+	"Re",
+	"Im",
 }
 
 for k, v in pairs(sequence_specs) do
