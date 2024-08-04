@@ -103,7 +103,7 @@ autosnips = {
 		},
 		fmta(
 			[[
-			\langle <> \rangle <>
+			\langle <> \rangle<>
 			]],
 			{ i(1), i(0) }
 		)

@@ -20,9 +20,8 @@ local function sec_snippet(trig, env)
 		fmta(
 			[[
 			\<>{<>}
-			<>
 			]],
-			{ t(env), i(1), i(0) }
+			{ t(env), i(0) }
 		),
 		opts
 	)
@@ -39,9 +38,8 @@ local function labeled_sec_snippet(trig, env)
 		fmta(
 			[[
 			\<>{<>}\label{<>:<>}
-			<>
 			]],
-			{ t(env), i(1), t(trig), l(l._1:gsub("[^%w]+", "_"):gsub("_$", ""):lower(), 1), i(0) }
+			{ t(env), i(0), t(trig), l(l._1:gsub("[^%w]+", "_"):gsub("_$", ""):lower(), 0) }
 		),
 		opts
 	)

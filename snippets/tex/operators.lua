@@ -81,21 +81,6 @@ autosnips = {
 		end), i(1), i(0) }),
 		opts
 	),
-
-	-- s(
-	-- 	{ trig = "lim", name = "lim(sup|inf)", desc = "lim(sup|inf)" },
-	-- 	fmta([[\lim<><><>]], {
-	-- 		c(1, { t(""), t("sup"), t("inf") }),
-	-- 		c(2, { t(""), fmta([[_{<> \to <>}]], { i(1, "n"), i(2, "\\infty") }) }),
-	-- 		i(0),
-	-- 	}),
-	-- 	opts
-	-- ),
-	--	s(
-	--		{ trig = "set", name = "set", desc = "set" },
-	--		fmta([[\{<>\}<>]], { c(1, { r(1, ""), sn(nil, { r(1, ""), t(" \\mid "), i(2) }) }), i(0) }),
-	--		opts
-	--	),
 	s(
 		{ trig = "bnc", name = "binomial", desc = "binomial (nCR)" },
 		fmta([[\binom{<>}{<>}<>]], { i(1), i(2), i(0) }),
@@ -129,6 +114,7 @@ local operator_specs = {
 	"csc",
 	"sec",
 	"log",
+	"ord",
 	--"ast",
 	"deg",
 	"det",

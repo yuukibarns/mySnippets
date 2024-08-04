@@ -106,31 +106,31 @@ autosnips = {
 		),
 		opts
 	),
-	s(
-		{
-			trig = "``",
-			wordTrig = false,
-			name = "``''",
-			desc = "double quotation marks.",
-		},
-		fmta(
-			[[
-			 ``<>''<>
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
+	-- s(
+	-- 	{
+	-- 		trig = "``",
+	-- 		wordTrig = false,
+	-- 		name = "``''",
+	-- 		desc = "double quotation marks.",
+	-- 	},
+	-- 	fmta(
+	-- 		[[
+	-- 		 ``<>''<>
+	-- 		]],
+	-- 		{ i(1), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
 	s(
 		{
 			trig = "''",
 			wordTrig = false,
-			name = "`'",
+			name = "``''",
 			desc = "single quotation marks",
 		},
 		fmta(
 			[[
-			 `<>'<>
+			 ``<>''<>
 			]],
 			{ i(1), i(0) }
 		),
