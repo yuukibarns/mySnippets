@@ -36,37 +36,12 @@ autosnips = {
 		fmta([[\int_{<>}^{<>}<>]], { i(1, "-\\infty"), i(2, "\\infty"), i(0) }),
 		opts
 	),
-	-- s(
-	-- 	{ trig = "dfu", name = "deffunction", desc = "def+function.", hidden = true },
-	-- 	fmta([[\colon <>]], {
-	-- 		c(1, {
-	-- 			fmta([[<> \to <>]], { i(1), i(0) }),
-	-- 			fmta([[<> \longrightarrow <>]], { i(1), i(0) }),
-	-- 		}),
-	-- 	}),
-	-- 	opts
-	-- ),
 	s(
 		{ trig = "xra", name = "xrightarrow", desc = "xrightarrow." },
 		fmta([[\xrightarrow{<>}<>]], { i(1), i(0) }),
 		opts
 	),
 	s({ trig = "xla", name = "xleftarrow", desc = "xleftarrow." }, fmta([[\xleftarrow{<>}<>]], { i(1), i(0) }), opts),
-	-- s(
-	-- 	{ trig = "dyd", name = "dy/dx", desc = "dy/dx." },
-	-- 	fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}<>]], { i(1), i(2), i(0) }),
-	-- 	opts
-	-- ),
-	-- s(
-	-- 	{ trig = "dyp", name = "py/px", desc = "py/px." },
-	-- 	fmta([[\frac{\partial<>}{\partial<>}<>]], { i(1), i(2), i(0) }),
-	-- 	opts
-	-- ),
-	-- s(
-	-- 	{ trig = "\\|Ln", name = "L norms", desc = "L norms.", wordTrig = false },
-	-- 	fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }),
-	-- 	opts
-	-- ),
 	s({ trig = "mod", name = "modula", desc = "= (mod I)." }, fmta([[\ (\mathrm{mod}\ <>)]], { i(1) }), opts),
 	-- fractions
 	s(

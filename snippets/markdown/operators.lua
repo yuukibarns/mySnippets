@@ -21,29 +21,11 @@ local function sequence_snippet(trig, cmd, desc)
 end
 
 autosnips = {
-	--After having learned differential forms, I think "\," is not necessary.
 	s(
 		{ trig = "dint", name = "integral", desc = "Insert integral notation." },
 		fmta([[\int_{<>}^{<>}<>]], { i(1, "-\\infty"), i(2, "\\infty"), i(0) }),
 		opts
 	),
-
-	-- s(
-	-- 	{ trig = "fint", name = "integral", desc = "Insert integral notation." },
-	-- 	fmta([[\int_{<>}<>]], { i(1), i(0) }),
-	-- 	opts
-	-- ),
-
-	-- s(
-	-- 	{ trig = "dfu", name = "deffunction", desc = "def+function." },
-	-- 	fmta([[\colon <>]], {
-	-- 		c(1, {
-	-- 			fmta([[<> \to <>]], { i(1), i(0) }),
-	-- 			fmta([[<> \longrightarrow <>]], { i(1), i(0) }),
-	-- 		}),
-	-- 	}),
-	-- 	opts
-	-- ),
 
 	s(
 		{ trig = "xra", name = "xrightarrow", desc = "xrightarrow." },
@@ -51,20 +33,6 @@ autosnips = {
 		opts
 	),
 	s({ trig = "xla", name = "xleftarrow", desc = "xleftarrow." }, fmta([[\xleftarrow{<>}<>]], { i(1), i(0) }), opts),
-
-	-- s(
-	-- 	{ trig = "dyd", name = "dy/dx", desc = "dy/dx." },
-	-- 	fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}<>]], { i(1), i(2), i(0) }),
-	-- 	opts
-	-- ),
-	--
-	-- s(
-	-- 	{ trig = "dyp", name = "py/px", desc = "py/px." },
-	-- 	fmta([[\frac{\partial<>}{\partial<>}<>]], { i(1), i(2), i(0) }),
-	-- 	opts
-	-- ),
-
-	-- s({ trig = "\\|Ln", name = "L norms", desc = "L norms." }, fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }), opts),
 
 	s({ trig = "mod", name = "modulo", desc = "= (mod I)." }, fmta([[\ (\mathrm{mod}\ <>)]], { i(1) }), opts),
 
@@ -105,8 +73,6 @@ local sequence_specs = {
 }
 
 local operator_specs = {
-	--"cod",
-	--"coker",
 	"int",
 	"arcsin",
 	"sin",
