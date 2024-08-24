@@ -52,19 +52,19 @@ autosnips = {
 	),
 	s({ trig = "xla", name = "xleftarrow", desc = "xleftarrow." }, fmta([[\xleftarrow{<>}<>]], { i(1), i(0) }), opts),
 
-	s(
-		{ trig = "dyd", name = "dy/dx", desc = "dy/dx." },
-		fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}<>]], { i(1), i(2), i(0) }),
-		opts
-	),
+	-- s(
+	-- 	{ trig = "dyd", name = "dy/dx", desc = "dy/dx." },
+	-- 	fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}<>]], { i(1), i(2), i(0) }),
+	-- 	opts
+	-- ),
+	--
+	-- s(
+	-- 	{ trig = "dyp", name = "py/px", desc = "py/px." },
+	-- 	fmta([[\frac{\partial<>}{\partial<>}<>]], { i(1), i(2), i(0) }),
+	-- 	opts
+	-- ),
 
-	s(
-		{ trig = "dyp", name = "py/px", desc = "py/px." },
-		fmta([[\frac{\partial<>}{\partial<>}<>]], { i(1), i(2), i(0) }),
-		opts
-	),
-
-	s({ trig = "\\|Ln", name = "L norms", desc = "L norms." }, fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }), opts),
+	-- s({ trig = "\\|Ln", name = "L norms", desc = "L norms." }, fmta([[\|_{L^{<>}}<>]], { i(1), i(0) }), opts),
 
 	s({ trig = "mod", name = "modulo", desc = "= (mod I)." }, fmta([[\ (\mathrm{mod}\ <>)]], { i(1) }), opts),
 
@@ -82,16 +82,6 @@ autosnips = {
 		end), i(1), i(0) }),
 		opts
 	),
-
-	-- s(
-	-- 	{ trig = "lim", name = "lim(sup|inf)", desc = "lim(sup|inf)" },
-	-- 	fmta([[\lim<><><>]], {
-	-- 		c(1, { t(""), t("sup"), t("inf") }),
-	-- 		--c(2, { t(""), fmta([[_{<> \to <>}]], { i(1, "n"), i(2, "\\infty") }) }),
-	-- 		i(0),
-	-- 	}),
-	-- 	opts
-	-- ),
 
 	s(
 		{ trig = "bnc", name = "binomial", desc = "binomial (nCR)" },
@@ -133,13 +123,15 @@ local operator_specs = {
 	"det",
 	"dim",
 	"exp",
-	--"hom",
+	"hom",
 	"inf",
 	"sup",
 	"ker",
 	"max",
 	"min",
 	"lim",
+	"Re",
+	"Im",
 	-- "perp",
 	-- "star",
 }
