@@ -23,7 +23,7 @@ end
 autosnips = {
 	s(
 		{
-			trig = "([l.])([r.])([abcemnpgh])",
+			trig = "([l.])([r.])([abcemnp])",
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,
