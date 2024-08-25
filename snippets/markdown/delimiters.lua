@@ -4,14 +4,12 @@ local tex = require("mySnippets.markdown")
 
 local brackets = {
 	a = { "\\langle ", "\\rangle" },
-	b = { "\\lbrack", "\\rbrack" },
+	b = { "\\lbrack ", "\\rbrack" },
 	c = { "\\{", "\\}" },
 	e = { "\\lceil ", "\\rceil" },
 	m = { "|", "|" },
 	n = { "\\|", "\\|" },
 	p = { "(", ")" },
-	g = { "[", ")" },
-	h = { "(", "]" },
 }
 
 local function get_visual(_, parent)
@@ -130,6 +128,36 @@ autosnips = {
 		fmta(
 			[[
 			\|<>\|<>
+			]],
+			{ i(1), i(0) }
+		)
+	),
+	s(
+		{
+			trig = "lrg",
+			name = "half closed half open interval",
+			wordTrig = true,
+			condition = tex.in_math,
+			show_condition = tex.in_math,
+		},
+		fmta(
+			[[
+			\lbrack <> \rparen<>
+			]],
+			{ i(1), i(0) }
+		)
+	),
+	s(
+		{
+			trig = "lrh",
+			name = "half open half closed interval",
+			wordTrig = false,
+			condition = tex.in_math,
+			show_condition = tex.in_math,
+		},
+		fmta(
+			[[
+			\lparen <> \rbrack<>
 			]],
 			{ i(1), i(0) }
 		)

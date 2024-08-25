@@ -1,19 +1,15 @@
 local autosnips = {}
 
--- local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("mySnippets.latex")
 
 local brackets = {
-	a = { "\\langle", "\\rangle" },
-	--	A = { "Angle", "Angle" },
-	b = { "[", "]" },
-	--	B = { "Brack", "Brack" },
+	a = { "\\langle ", "\\rangle" },
+	b = { "\\lbrack ", "\\rbrack" },
 	c = { "\\{", "\\}" },
+	e = { "\\lceil ", "\\rceil" },
 	m = { "|", "|" },
 	n = { "\\|", "\\|" },
 	p = { "(", ")" },
-	g = { "[", ")" },
-	h = { "(", "]" },
 }
 
 local function get_visual(_, parent)
@@ -27,16 +23,15 @@ end
 autosnips = {
 	s(
 		{
-			trig = "([l.])([r.])([abcmnpgh])",
+			trig = "([l.])([r.])([abcemnpgh])",
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,
-			hidden = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
-		fmta([[\left<> <> \right<><>]], {
+		fmta([[\left<><>\right<><>]], {
 			f(function(_, snip)
 				if snip.captures[1] == "." then
 					return "."
@@ -62,7 +57,6 @@ autosnips = {
 			trig = ";o",
 			name = "parentheses",
 			desc = "parenthese delimiter",
-			regTrig = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
@@ -79,14 +73,13 @@ autosnips = {
 			trig = ";9",
 			name = "brackets",
 			desc = "bracket delimiter",
-			regTrig = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
-			[<>]<>
+			\lbrack <> \rbrack<>
 			]],
 			{ i(1), i(0) }
 		)
@@ -96,7 +89,6 @@ autosnips = {
 			trig = ";,",
 			name = "angles",
 			desc = "angle delimiter",
-			regTrig = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
@@ -113,7 +105,6 @@ autosnips = {
 			trig = ";\\",
 			name = "norm",
 			desc = "norm delimiter",
-			regTrig = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
@@ -130,7 +121,6 @@ autosnips = {
 			trig = ";|",
 			name = "Norm",
 			desc = "Norm delimiter",
-			regTrig = true,
 			wordTrig = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
@@ -142,24 +132,36 @@ autosnips = {
 			{ i(1), i(0) }
 		)
 	),
-	-- s(
-	-- 	{
-	-- 		trig = "cvec",
-	-- 		name = "column vector",
-	-- 		hidden = true,
-	-- 		condition = conds_expand.line_begin * tex.in_math,
-	-- 	},
-	-- 	fmta(
-	-- 		[[
-	-- 		\begin{pmatrix}
-	-- 			<>_<> \\
-	-- 			\vdots \\
-	-- 			<>_<>
-	-- 		\end{pmatrix}
-	-- 		]],
-	-- 		{ i(1, "x"), i(2, "1"), rep(1), i(3, "n") }
-	-- 	)
-	-- ),
+	s(
+		{
+			trig = "lrg",
+			name = "half closed half open interval",
+			wordTrig = true,
+			condition = tex.in_math,
+			show_condition = tex.in_math,
+		},
+		fmta(
+			[[
+			\lbrack <> \rparen<>
+			]],
+			{ i(1), i(0) }
+		)
+	),
+	s(
+		{
+			trig = "lrh",
+			name = "half open half closed interval",
+			wordTrig = false,
+			condition = tex.in_math,
+			show_condition = tex.in_math,
+		},
+		fmta(
+			[[
+			\lparen <> \rbrack<>
+			]],
+			{ i(1), i(0) }
+		)
+	),
 }
 
 return nil, autosnips
