@@ -4,7 +4,7 @@ local tex = require("mySnippets.markdown")
 
 local brackets = {
 	a = { "\\langle ", "\\rangle" },
-	b = { "[", "]" },
+	b = { "\\lbrack", "\\rbrack" },
 	c = { "\\{", "\\}" },
 	e = { "\\lceil ", "\\rceil" },
 	m = { "|", "|" },
@@ -81,7 +81,7 @@ autosnips = {
 		},
 		fmta(
 			[[
-			[<>]<>
+			\lbrack <> \rbrack<>
 			]],
 			{ i(1), i(0) }
 		)
@@ -97,7 +97,7 @@ autosnips = {
 		},
 		fmta(
 			[[
-			\langle <> \rangle <>
+			\langle <> \rangle<>
 			]],
 			{ i(1), i(0) }
 		)
