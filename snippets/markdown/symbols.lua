@@ -211,9 +211,21 @@ local single_command_math_specs = {
 		context = { name = "overline", desc = "overline" },
 		cmd = [[\overline]],
 	},
-	vcx = {
+	vec = {
 		context = { name = "vector", desc = "vector" },
 		cmd = [[\vec]],
+	},
+	bra = {
+		context = { name = "vector", desc = "vector" },
+		cmd = [[\bra]],
+	},
+	ket = {
+		context = { name = "vector", desc = "vector" },
+		cmd = [[\ket]],
+	},
+	bket = {
+		context = { name = "vector", desc = "vector" },
+		cmd = [[\braket]],
 	},
 	bm = {
 		context = { name = "boldmath", desc = "boldmath" },
@@ -270,6 +282,7 @@ local symbol_specs_w = {
 	dag = { context = { name = "†" }, cmd = [[\dagger]] },
 	bot = { context = { name = "|_" }, cmd = [[\bot]] },
 	wp = { context = { name = "Weierstrass p function" }, cmd = [[\wp]] },
+	hbar = { context = { name = "h bar" }, cmd = [[\hbar]] },
 	lll = { context = { name = "ℓ" }, cmd = [[\ell]] },
 	emb = { context = { name = "hookrightarrow" }, cmd = [[\hookrightarrow ]] },
 }

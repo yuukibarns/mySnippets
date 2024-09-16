@@ -7,26 +7,6 @@ local tex = require("mySnippets.markdown")
 local opts = { condition = conds_expand.line_begin, show_condition = pos.line_begin }
 local opts2 = { condition = tex.in_text, show_condition = tex.in_text }
 snips = {
-	-- s({ trig = "#([2-6])", name = "Heading", desc = "Add Heading", regTrig = true, hidden = true }, {
-	-- 	f(function(_, snip)
-	-- 		return string.rep("#", tonumber(snip.captures[1], 10)) .. " "
-	-- 	end, {}),
-	-- }, opts),
-
-	-- s(
-	-- 	{ trig = "code", name = "Insert fenced code block" },
-	-- 	{ t("``` "), i(1, "lang"), t({ "", "" }), i(0), t({ "", "```" }) },
-	-- 	fmt(
-	-- 		[[
-	-- 		``` {}
-	-- 		{}
-	-- 		```
-	-- 		]],
-	-- 		{ i(1, "lang"), i(0) }
-	-- 	),
-	-- 	opts
-	-- ),
-
 	s(
 		{ trig = "meta", name = "Markdown front matter (YAML format)" },
 		fmt(
@@ -48,16 +28,21 @@ snips = {
 		}
 	),
 	s(
-		{ trig = "fig", name = "Markdown figures", desc = "Add an image." },
+		{ trig = "fig", name = "Markdown figure", desc = "Add an image." },
 		fmt([[![{}]({} "{}")]], { i(1, "Figure"), i(2, "url"), i(3, "title") }),
 		opts
 	),
 
-	-- s({ trig = "td", name = "too long, do not read" }, { t("tl;dr: ") }, opts),
-
 	s(
-		{ trig = "link", name = "Markdown Links", desc = "Insert a Link" },
-		fmt([[[{}]({})]], { i(1, "title"), i(2, "url") }),
+		{ trig = "figure", name = "Markdown figure with caption", desc = "Add an image with caption" },
+		fmt(
+			[[
+		| ![{}]({}) |
+		| :--: |
+		| *{}* |
+		]],
+			{ i(1, "Figure"), i(2, "URL"), i(3, "Caption") }
+		),
 		opts
 	),
 }

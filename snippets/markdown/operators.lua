@@ -8,13 +8,23 @@ local function operator_snippet(trig)
 	return s({ trig = trig, name = trig }, t([[\]] .. trig), opts)
 end
 
-local function sequence_snippet(trig, cmd, desc)
+local function d_sequence_snippet(trig, cmd, desc)
 	return s(
-		{ trig = trig, name = desc, desc = desc },
+		{ trig = "d" .. trig, name = desc, desc = desc },
 		fmta([[\<><><>]], {
 			t(cmd),
 			c(1, { fmta([[_{<>}^{<>}]], { i(1, "i=0"), i(2, "\\infty") }), t("") }),
 			i(0),
+		}),
+		opts
+	)
+end
+
+local function sequence_snippet(trig, cmd, desc)
+	return s(
+		{ trig = trig, name = desc, desc = desc },
+		fmta([[\<>]], {
+			t(cmd),
 		}),
 		opts
 	)
@@ -84,7 +94,7 @@ local operator_specs = {
 	"csc",
 	"sec",
 	"log",
-	--"ast",
+	"ast",
 	"deg",
 	"det",
 	"dim",
@@ -101,6 +111,10 @@ local operator_specs = {
 	-- "perp",
 	-- "star",
 }
+
+for k, v in pairs(sequence_specs) do
+	table.insert(autosnips, d_sequence_snippet(k, v[1], v[2]))
+end
 
 for k, v in pairs(sequence_specs) do
 	table.insert(autosnips, sequence_snippet(k, v[1], v[2]))

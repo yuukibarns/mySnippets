@@ -153,33 +153,33 @@ autosnips = {
 	-- 	}
 	-- ),
 
-	s({
-		trig = "Tfae",
-		name = "The following are equivalent",
-	}, { t("The following are equivalent") }, opts2),
-
-	s({
-		trig = "([wW])log",
-		name = "without loss of generality",
-		regTrig = true,
-	}, {
-		f(function(_, snip)
-			return snip.captures[1] .. "ithout loss of generality"
-		end, {}),
-	}, opts2),
+	-- s({
+	-- 	trig = "Tfae",
+	-- 	name = "The following are equivalent",
+	-- }, { t("The following are equivalent") }, opts2),
+	--
+	-- s({
+	-- 	trig = "([wW])log",
+	-- 	name = "without loss of generality",
+	-- 	regTrig = true,
+	-- }, {
+	-- 	f(function(_, snip)
+	-- 		return snip.captures[1] .. "ithout loss of generality"
+	-- 	end, {}),
+	-- }, opts2),
 }
 
-local auto_phrase_specs = {
-	iee = "i.e., ",
-	egg = "e.g., ",
-	stt = "such that",
-	wrt = "with respect to ",
-	nbhd = "neighbourhood",
-	tfae = "the following are equivalent",
-}
+-- local auto_phrase_specs = {
+-- 	iee = "i.e., ",
+-- 	egg = "e.g., ",
+-- 	stt = "such that",
+-- 	wrt = "with respect to ",
+-- 	nbhd = "neighbourhood",
+-- 	tfae = "the following are equivalent",
+-- }
 
-for k, v in pairs(auto_phrase_specs) do
-	table.insert(autosnips, phrase_snippet(k, v))
-end
+-- for k, v in pairs(auto_phrase_specs) do
+-- 	table.insert(autosnips, phrase_snippet(k, v))
+-- end
 
 return snips, autosnips
