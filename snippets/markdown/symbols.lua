@@ -12,7 +12,7 @@ local function symbol_snippet(context, cmd)
 	return s(context, t(cmd), opts)
 end
 
-local function symbol_snippet2(context, cmd)
+local function symbol_snippet_in_text(context, cmd)
 	context.desc = cmd
 	context.name = context.name or cmd:gsub([[\]], "")
 	context.docstring = cmd .. [[{0}]]
@@ -24,7 +24,7 @@ local function symbol_snippet2(context, cmd)
 	)
 end
 
-local function symbol_snippet_w(context, cmd)
+local function symbol_snippet_wordtrig_true(context, cmd)
 	context.desc = cmd
 	context.name = context.name or cmd:gsub([[\]], "")
 	context.docstring = cmd .. [[{0}]]
@@ -87,50 +87,19 @@ autosnips = {
 		end, {}),
 	}, opts),
 
-	s(
-		{ trig = "set", name = "set", desc = "set" },
-		fmta([[\{<>\}<>]], { c(1, { r(1, ""), sn(nil, { r(1, ""), t(" \\mid "), i(2) }) }), i(0) }),
-		opts
-	),
-
-	s(
-		{ trig = "Set", name = "Set", desc = "big set" },
-		fmta([[\left\{<>\right\}<>]], { c(1, { r(1, ""), sn(nil, { r(1, ""), t(" \\ \\bigg|\\ "), i(2) }) }), i(0) }),
-		opts
-	),
-
-	-- s({ trig = "<|", name = "triangleleft <|", wordTrig = false, hidden = true }, { t("\\triangleleft ") }, opts),
-	--
-	-- s({ trig = "|>", name = "triangleright |>", wordTrig = false, hidden = true }, { t("\\triangleright ") }, opts),
-
-	s(
-		{ trig = "([QRNZ])P", name = "positive", wordTrig = true, regTrig = true },
-		{ f(function(_, snip)
-			return "\\mathbb{" .. snip.captures[1] .. "}^{+}"
-		end, {}) },
-		opts
-	),
-
-	s(
-		{ trig = "([QRZ])N", name = "negative", wordTrig = true, regTrig = true },
-		{ f(function(_, snip)
-			return "\\mathbb{" .. snip.captures[1] .. "}^{-}"
-		end, {}) },
-		opts
-	),
+	s({ trig = "set", name = "set", desc = "set" }, fmta([[\{<>\}<>]], { i(1), i(0) }), opts),
 
 	s(
 		{ trig = "^", name = "auto supscript", wordTrig = false, hidden = true },
 		fmta([[^{<>}<>]], { i(1), i(0) }),
 		opts
 	),
+
 	s(
 		{ trig = "_", name = "auto subscript", wordTrig = false, hidden = true },
 		fmta([[_{<>}<>]], { i(1), i(0) }),
 		opts
 	),
-
-	s({ trig = "&&", name = "align", wordTrig = false, hidden = true }, { t("& \\ ") }, { condition = tex.in_math }),
 
 	s({ trig = "'([mnkij])", name = "mnkji derivatives", wordTrig = false, regTrig = true }, {
 		f(function(_, snip)
@@ -245,7 +214,7 @@ local single_command_math_specs = {
 	},
 }
 
-local symbol_specs_w = {
+local symbol_specs_wordtrig_true = {
 	--sets
 	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
 	CC = { context = { name = "ℂ" }, cmd = [[\mathbb{C}]] },
@@ -268,8 +237,6 @@ local symbol_specs_w = {
 	ww = { context = { name = "w" }, cmd = [[\wedge]] },
 	vv = { context = { name = "v" }, cmd = [[\vee]] },
 	nabl = { context = { name = "∇" }, cmd = [[\nabla]] },
-	-- dd = { context = { name = "diferential operator" }, cmd = [[\mathrm{d}]] },
-	-- ill = { context = { name = "imaginary number" }, cmd = [[\mathrm{i}]] },
 	cc = { context = { name = "⊆" }, cmd = [[\subseteq]] },
 	cq = { context = { name = "⊊" }, cmd = [[\subsetneq]] },
 	qq = { context = { name = "⊇" }, cmd = [[\supseteq]] },
@@ -298,8 +265,6 @@ local symbol_specs = {
 	["!q"] = { context = { name = "⊉" }, cmd = [[\nsupseteq]] },
 	-- operators
 	["!="] = { context = { name = "!=" }, cmd = [[\neq]] },
-	-- [";<"] = { context = { name = "<" }, cmd = [[<]] },
-	-- [";>"] = { context = { name = ">" }, cmd = [[>]] },
 	["<="] = { context = { name = "≤" }, cmd = [[\leq]] },
 	[">="] = { context = { name = "≥" }, cmd = [[\geq]] },
 	["<<"] = { context = { name = "<<" }, cmd = [[\ll]] },
@@ -332,7 +297,6 @@ local symbol_specs = {
 	["!!>"] = { context = { name = "↦" }, cmd = [[\longmapsto]] },
 	["-->"] = { context = { name = "⟶", priority = 500 }, cmd = [[\longrightarrow]] },
 	["<->"] = { context = { name = "↔", priority = 500 }, cmd = [[\longleftrightarrow]] },
-	--["<-->"] = { context = { name = "⟷", priority = 600 }, cmd = [[\longleftrightarrow ]] },
 	["2>"] = { context = { name = "⇉", priority = 400 }, cmd = [[\rightrightarrows]] },
 	["/>"] = { context = { name = "/>" }, cmd = [[\nearrow]] },
 	["\\>"] = { context = { name = "\\>" }, cmd = [[\searrow]] },
@@ -381,7 +345,7 @@ local symbol_specs = {
 	["\\quad  "] = { context = { name = "   " }, cmd = [[\qquad ]] },
 	[";3"] = { context = { name = "#" }, cmd = [[\#]] },
 }
-local symbol_specs2_w = {
+local symbol_specs_in_text_manual = {
 	-- sets
 	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
 	CC = { context = { name = "ℂ" }, cmd = [[\mathbb{C}]] },
@@ -398,7 +362,7 @@ local symbol_specs2_w = {
 	ZZ = { context = { name = "ℤ" }, cmd = [[\mathbb{Z}]] },
 	iff = { context = { name = "<=>" }, cmd = [[\iff]] },
 }
-local symbol_specs2 = {
+local symbol_specs_in_text = {
 	-- greek alphabet
 	[";a"] = { context = { name = "alpha" }, cmd = [[\alpha]] },
 	[";b"] = { context = { name = "beta" }, cmd = [[\beta]] },
@@ -446,7 +410,7 @@ local symbol_specs2 = {
 }
 
 local symbol_snippets = {}
-local symbol_snippets2 = {}
+local symbol_snippets_manual = {}
 for k, v in pairs(single_command_math_specs) do
 	table.insert(
 		symbol_snippets,
@@ -454,21 +418,27 @@ for k, v in pairs(single_command_math_specs) do
 	)
 end
 
-for k, v in pairs(symbol_specs_w) do
-	table.insert(symbol_snippets, symbol_snippet_w(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
+for k, v in pairs(symbol_specs_wordtrig_true) do
+	table.insert(
+		symbol_snippets,
+		symbol_snippet_wordtrig_true(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd)
+	)
 end
 
 for k, v in pairs(symbol_specs) do
 	table.insert(symbol_snippets, symbol_snippet(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
 end
-for k, v in pairs(symbol_specs2_w) do
-	table.insert(symbol_snippets2, symbol_snippet2(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
+for k, v in pairs(symbol_specs_in_text_manual) do
+	table.insert(
+		symbol_snippets_manual,
+		symbol_snippet_in_text(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd)
+	)
 end
-for k, v in pairs(symbol_specs2) do
-	table.insert(symbol_snippets, symbol_snippet2(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
+for k, v in pairs(symbol_specs_in_text) do
+	table.insert(symbol_snippets, symbol_snippet_in_text(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
 end
 
 vim.list_extend(autosnips, symbol_snippets)
-vim.list_extend(snips, symbol_snippets2)
+vim.list_extend(snips, symbol_snippets_manual)
 
 return snips, autosnips
