@@ -12,17 +12,17 @@ local function symbol_snippet(context, cmd)
 	return s(context, t(cmd), opts)
 end
 
-local function symbol_snippet_in_text(context, cmd)
-	context.desc = cmd
-	context.name = context.name or cmd:gsub([[\]], "")
-	context.docstring = cmd .. [[{0}]]
-	context.wordTrig = true
-	return s(
-		context,
-		fmta([[<><><>]], { t("$"), t(cmd), t("$") }),
-		{ condition = tex.in_text, show_condition = tex.in_text }
-	)
-end
+-- local function symbol_snippet_in_text(context, cmd)
+-- 	context.desc = cmd
+-- 	context.name = context.name or cmd:gsub([[\]], "")
+-- 	context.docstring = cmd .. [[{0}]]
+-- 	context.wordTrig = true
+-- 	return s(
+-- 		context,
+-- 		fmta([[<><><>]], { t("$"), t(cmd), t("$") }),
+-- 		{ condition = tex.in_text, show_condition = tex.in_text }
+-- 	)
+-- end
 
 local function symbol_snippet_wordtrig_true(context, cmd)
 	context.desc = cmd
@@ -163,7 +163,7 @@ local single_command_math_specs = {
 		context = { name = "mathrm", desc = "mathrm text" },
 		cmd = [[\mathrm]],
 	},
-	bx = {
+	box = {
 		context = { name = "boxed", desc = "boxed" },
 		cmd = [[\boxed]],
 	},
@@ -211,6 +211,18 @@ local single_command_math_specs = {
 	sbt = {
 		context = { name = "substack", desc = "substack for sums/products" },
 		cmd = [[\substack]],
+	},
+	dot = {
+		context = { name = "dot derivatives", desc = "physical derivatives" },
+		cmd = [[\dot]],
+	},
+	ddot = {
+		context = { name = "dot derivatives", desc = "physical derivatives" },
+		cmd = [[\ddot]],
+	},
+	dddot = {
+		context = { name = "dot derivatives", desc = "physical derivatives" },
+		cmd = [[\dddot]],
 	},
 }
 
@@ -345,69 +357,69 @@ local symbol_specs = {
 	["\\quad  "] = { context = { name = "   " }, cmd = [[\qquad ]] },
 	[";3"] = { context = { name = "#" }, cmd = [[\#]] },
 }
-local symbol_specs_in_text_manual = {
-	-- sets
-	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
-	CC = { context = { name = "ℂ" }, cmd = [[\mathbb{C}]] },
-	DD = { context = { name = "𝔻" }, cmd = [[\mathbb{D}]] },
-	FF = { context = { name = "𝔽" }, cmd = [[\mathbb{F}]] },
-	GG = { context = { name = "𝔾" }, cmd = [[\mathbb{G}]] },
-	HH = { context = { name = "ℍ" }, cmd = [[\mathbb{H}]] },
-	NN = { context = { name = "ℕ" }, cmd = [[\mathbb{N}]] },
-	OO = { context = { name = "O" }, cmd = [[\mathcal{O}]] },
-	LL = { context = { name = "L" }, cmd = [[\mathcal{L}]] },
-	PP = { context = { name = "ℙ" }, cmd = [[\mathbb{P}]] },
-	QQ = { context = { name = "ℚ" }, cmd = [[\mathbb{Q}]] },
-	RR = { context = { name = "ℝ" }, cmd = [[\mathbb{R}]] },
-	ZZ = { context = { name = "ℤ" }, cmd = [[\mathbb{Z}]] },
-	iff = { context = { name = "<=>" }, cmd = [[\iff]] },
-}
-local symbol_specs_in_text = {
-	-- greek alphabet
-	[";a"] = { context = { name = "alpha" }, cmd = [[\alpha]] },
-	[";b"] = { context = { name = "beta" }, cmd = [[\beta]] },
-	[";g"] = { context = { name = "gamma" }, cmd = [[\gamma]] },
-	[";d"] = { context = { name = "delta" }, cmd = [[\delta]] },
-	[";e"] = { context = { name = "epsilon" }, cmd = [[\epsilon]] },
-	[";z"] = { context = { name = "zeta" }, cmd = [[\zeta]] },
-	[";h"] = { context = { name = "eta" }, cmd = [[\eta]] },
-	[";q"] = { context = { name = "theta" }, cmd = [[\theta]] },
-	[";i"] = { context = { name = "iota" }, cmd = [[\iota]] },
-	[";k"] = { context = { name = "kappa" }, cmd = [[\kappa]] },
-	[";l"] = { context = { name = "lambda" }, cmd = [[\lambda]] },
-	[";m"] = { context = { name = "mu" }, cmd = [[\mu]] },
-	[";n"] = { context = { name = "nu" }, cmd = [[\nu]] },
-	[";x"] = { context = { name = "xi" }, cmd = [[\xi]] },
-	[";p"] = { context = { name = "pi" }, cmd = [[\pi]] },
-	[";r"] = { context = { name = "rho" }, cmd = [[\rho]] },
-	[";s"] = { context = { name = "sigma" }, cmd = [[\sigma]] },
-	[";t"] = { context = { name = "tau" }, cmd = [[\tau]] },
-	[";u"] = { context = { name = "upsilon" }, cmd = [[\upsilon]] },
-	[";f"] = { context = { name = "phi" }, cmd = [[\phi]] },
-	[";c"] = { context = { name = "chi" }, cmd = [[\chi]] },
-	[";y"] = { context = { name = "psi" }, cmd = [[\psi]] },
-	[";w"] = { context = { name = "omega" }, cmd = [[\omega]] },
-	--capital symbols
-	[";G"] = { context = { name = "Gamma" }, cmd = [[\Gamma]] },
-	[";D"] = { context = { name = "Delta" }, cmd = [[\Delta]] },
-	[";Q"] = { context = { name = "Theta" }, cmd = [[\Theta]] },
-	[";L"] = { context = { name = "Lambda" }, cmd = [[\Lambda]] },
-	[";X"] = { context = { name = "Xi" }, cmd = [[\Xi]] },
-	[";P"] = { context = { name = "Pi" }, cmd = [[\Pi]] },
-	[";S"] = { context = { name = "Sigma" }, cmd = [[\Sigma]] },
-	[";U"] = { context = { name = "Upsilon" }, cmd = [[\Upsilon]] },
-	[";F"] = { context = { name = "Phi" }, cmd = [[\Phi]] },
-	--	[";C"] = { context = { name = "Chi" }, cmd = [[\Chi]] },
-	[";Y"] = { context = { name = "Psi" }, cmd = [[\Psi]] },
-	[";W"] = { context = { name = "Omega" }, cmd = [[\Omega]] },
-	--var symbols
-	[";1"] = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
-	[";2"] = { context = { name = "varphi" }, cmd = [[\varphi]] },
-	--arrows
-	["=>"] = { context = { name = "⇒" }, cmd = [[\implies]] },
-	["<=>"] = { context = { name = "⟺" }, cmd = [[\iff]] },
-	["=<"] = { context = { name = "⇐" }, cmd = [[\impliedby]] },
-}
+-- local symbol_specs_in_text_manual = {
+-- 	-- sets
+-- 	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
+-- 	CC = { context = { name = "ℂ" }, cmd = [[\mathbb{C}]] },
+-- 	DD = { context = { name = "𝔻" }, cmd = [[\mathbb{D}]] },
+-- 	FF = { context = { name = "𝔽" }, cmd = [[\mathbb{F}]] },
+-- 	GG = { context = { name = "𝔾" }, cmd = [[\mathbb{G}]] },
+-- 	HH = { context = { name = "ℍ" }, cmd = [[\mathbb{H}]] },
+-- 	NN = { context = { name = "ℕ" }, cmd = [[\mathbb{N}]] },
+-- 	OO = { context = { name = "O" }, cmd = [[\mathcal{O}]] },
+-- 	LL = { context = { name = "L" }, cmd = [[\mathcal{L}]] },
+-- 	PP = { context = { name = "ℙ" }, cmd = [[\mathbb{P}]] },
+-- 	QQ = { context = { name = "ℚ" }, cmd = [[\mathbb{Q}]] },
+-- 	RR = { context = { name = "ℝ" }, cmd = [[\mathbb{R}]] },
+-- 	ZZ = { context = { name = "ℤ" }, cmd = [[\mathbb{Z}]] },
+-- 	iff = { context = { name = "<=>" }, cmd = [[\iff]] },
+-- }
+-- local symbol_specs_in_text = {
+-- 	-- greek alphabet
+-- 	[";a"] = { context = { name = "alpha" }, cmd = [[\alpha]] },
+-- 	[";b"] = { context = { name = "beta" }, cmd = [[\beta]] },
+-- 	[";g"] = { context = { name = "gamma" }, cmd = [[\gamma]] },
+-- 	[";d"] = { context = { name = "delta" }, cmd = [[\delta]] },
+-- 	[";e"] = { context = { name = "epsilon" }, cmd = [[\epsilon]] },
+-- 	[";z"] = { context = { name = "zeta" }, cmd = [[\zeta]] },
+-- 	[";h"] = { context = { name = "eta" }, cmd = [[\eta]] },
+-- 	[";q"] = { context = { name = "theta" }, cmd = [[\theta]] },
+-- 	[";i"] = { context = { name = "iota" }, cmd = [[\iota]] },
+-- 	[";k"] = { context = { name = "kappa" }, cmd = [[\kappa]] },
+-- 	[";l"] = { context = { name = "lambda" }, cmd = [[\lambda]] },
+-- 	[";m"] = { context = { name = "mu" }, cmd = [[\mu]] },
+-- 	[";n"] = { context = { name = "nu" }, cmd = [[\nu]] },
+-- 	[";x"] = { context = { name = "xi" }, cmd = [[\xi]] },
+-- 	[";p"] = { context = { name = "pi" }, cmd = [[\pi]] },
+-- 	[";r"] = { context = { name = "rho" }, cmd = [[\rho]] },
+-- 	[";s"] = { context = { name = "sigma" }, cmd = [[\sigma]] },
+-- 	[";t"] = { context = { name = "tau" }, cmd = [[\tau]] },
+-- 	[";u"] = { context = { name = "upsilon" }, cmd = [[\upsilon]] },
+-- 	[";f"] = { context = { name = "phi" }, cmd = [[\phi]] },
+-- 	[";c"] = { context = { name = "chi" }, cmd = [[\chi]] },
+-- 	[";y"] = { context = { name = "psi" }, cmd = [[\psi]] },
+-- 	[";w"] = { context = { name = "omega" }, cmd = [[\omega]] },
+-- 	--capital symbols
+-- 	[";G"] = { context = { name = "Gamma" }, cmd = [[\Gamma]] },
+-- 	[";D"] = { context = { name = "Delta" }, cmd = [[\Delta]] },
+-- 	[";Q"] = { context = { name = "Theta" }, cmd = [[\Theta]] },
+-- 	[";L"] = { context = { name = "Lambda" }, cmd = [[\Lambda]] },
+-- 	[";X"] = { context = { name = "Xi" }, cmd = [[\Xi]] },
+-- 	[";P"] = { context = { name = "Pi" }, cmd = [[\Pi]] },
+-- 	[";S"] = { context = { name = "Sigma" }, cmd = [[\Sigma]] },
+-- 	[";U"] = { context = { name = "Upsilon" }, cmd = [[\Upsilon]] },
+-- 	[";F"] = { context = { name = "Phi" }, cmd = [[\Phi]] },
+-- 	--	[";C"] = { context = { name = "Chi" }, cmd = [[\Chi]] },
+-- 	[";Y"] = { context = { name = "Psi" }, cmd = [[\Psi]] },
+-- 	[";W"] = { context = { name = "Omega" }, cmd = [[\Omega]] },
+-- 	--var symbols
+-- 	[";1"] = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
+-- 	[";2"] = { context = { name = "varphi" }, cmd = [[\varphi]] },
+-- 	--arrows
+-- 	["=>"] = { context = { name = "⇒" }, cmd = [[\implies]] },
+-- 	["<=>"] = { context = { name = "⟺" }, cmd = [[\iff]] },
+-- 	["=<"] = { context = { name = "⇐" }, cmd = [[\impliedby]] },
+-- }
 
 local symbol_snippets = {}
 local symbol_snippets_manual = {}
@@ -428,15 +440,15 @@ end
 for k, v in pairs(symbol_specs) do
 	table.insert(symbol_snippets, symbol_snippet(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
 end
-for k, v in pairs(symbol_specs_in_text_manual) do
-	table.insert(
-		symbol_snippets_manual,
-		symbol_snippet_in_text(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd)
-	)
-end
-for k, v in pairs(symbol_specs_in_text) do
-	table.insert(symbol_snippets, symbol_snippet_in_text(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
-end
+-- for k, v in pairs(symbol_specs_in_text_manual) do
+-- 	table.insert(
+-- 		symbol_snippets_manual,
+-- 		symbol_snippet_in_text(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd)
+-- 	)
+-- end
+-- for k, v in pairs(symbol_specs_in_text) do
+-- 	table.insert(symbol_snippets, symbol_snippet_in_text(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
+-- end
 
 vim.list_extend(autosnips, symbol_snippets)
 vim.list_extend(snips, symbol_snippets_manual)
