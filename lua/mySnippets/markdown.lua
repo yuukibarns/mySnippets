@@ -36,6 +36,26 @@ local function in_math()
 	return false
 end
 
+---Check if cursor is in \text{} inside latex block
+---@return boolean
+local function in_text_math()
+	local node = vim.treesitter.get_node({ ignore_injections = false })
+	local text = false
+	while node do
+		if node:type() == "text_mode" then
+			text = true
+		elseif MATH_NODES[node:type()] then
+			if not text then
+				return false
+			else
+				return true
+			end
+		end
+		node = node:parent()
+	end
+	return false
+end
+
 ---Check if cursor is in treesitter node of 'text'
 ---@return boolean
 local function in_text()
@@ -62,6 +82,7 @@ end
 
 M.in_math = cond_obj.make_condition(in_math)
 M.in_text = cond_obj.make_condition(in_text)
+M.in_text_math = cond_obj.make_condition(in_text_math)
 --M.in_align = cond_obj.make_condition(in_align)
 
 return M
