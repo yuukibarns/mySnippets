@@ -27,9 +27,10 @@ autosnips = {
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,
-			wordTrig = false,
+			wordTrig = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
+			hidden = true,
 		},
 		fmta([[\left<><>\right<><>]], {
 			f(function(_, snip)
@@ -54,10 +55,11 @@ autosnips = {
 	),
 	s(
 		{
-			trig = ";o",
+			trig = ";(",
 			name = "parentheses",
 			desc = "parenthese delimiter",
 			wordTrig = false,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -70,10 +72,11 @@ autosnips = {
 	),
 	s(
 		{
-			trig = ";9",
+			trig = ";[",
 			name = "brackets",
 			desc = "bracket delimiter",
 			wordTrig = false,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -86,10 +89,28 @@ autosnips = {
 	),
 	s(
 		{
+			trig = ";{",
+			name = "braces",
+			desc = "brace delimiter",
+			wordTrig = false,
+			hidden = true,
+			condition = tex.in_math,
+			show_condition = tex.in_math,
+		},
+		fmta(
+			[[
+			\{<>\}<>
+			]],
+			{ i(1), i(0) }
+		)
+	),
+	s(
+		{
 			trig = ";|",
 			name = "norm",
 			desc = "norm delimiter",
 			wordTrig = false,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -106,6 +127,7 @@ autosnips = {
 			name = "Norm",
 			desc = "Norm delimiter",
 			wordTrig = false,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -121,6 +143,7 @@ autosnips = {
 			trig = "lrg",
 			name = "half closed half open interval",
 			wordTrig = true,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -136,6 +159,7 @@ autosnips = {
 			trig = "lrh",
 			name = "half open half closed interval",
 			wordTrig = false,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},

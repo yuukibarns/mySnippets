@@ -3,9 +3,6 @@ local autosnips = {}
 local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("mySnippets.markdown")
 
-local opts = { condition = tex.in_text }
-local opts2 = { condition = tex.in_text * conds_expand.line_begin }
-
 autosnips = {
 	s({
 		trig = "mk",

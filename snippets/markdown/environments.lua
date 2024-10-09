@@ -80,7 +80,6 @@ snips = {
 }
 
 autosnips = {
-
 	s(
 		{ trig = "(%d+)cases", name = "cases(math)", desc = "cases(math)", regTrig = true, hidden = true },
 		fmta(
@@ -96,7 +95,6 @@ autosnips = {
 			show_condition = tex.in_math,
 		}
 	),
-
 	s(
 		{
 			trig = "bal",
@@ -115,31 +113,6 @@ autosnips = {
 		{
 			condition = conds_expand.line_begin * tex.in_math,
 			show_condition = pos.line_begin * tex.in_math,
-		}
-	),
-
-	s(
-		{
-			trig = "equ",
-			name = "equations",
-			desc = "system of equations",
-			hidden = true,
-		},
-		fmta(
-			[[
-			$$
-			\left\lbrace
-			\begin{aligned}
-			<>
-			\end{aligned}
-			\right.
-			$$
-			]],
-			{ i(0) }
-		),
-		{
-			condition = conds_expand.line_begin,
-			show_condition = pos.line_begin,
 		}
 	),
 }

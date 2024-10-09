@@ -4,29 +4,9 @@ local conds_expand = require("luasnip.extras.conditions.expand")
 local pos = require("mySnippets.position")
 local tex = require("mySnippets.markdown")
 
-local opts = { condition = conds_expand.line_begin, show_condition = pos.line_begin }
-local opts2 = { condition = tex.in_text, show_condition = tex.in_text }
+local opts = { condition = conds_expand.line_begin, show_condition = pos.line_begin, hidden = true }
+local opts2 = { condition = tex.in_text, show_condition = tex.in_text, hidden = true }
 snips = {
-	s(
-		{ trig = "meta", name = "Markdown front matter (YAML format)" },
-		fmt(
-			[[
-			---
-			title: {}
-			date: {}
-			tags: ["{}"]
-			categories: ["{}"]
-			series: ["{}"]
-			---
-			{}
-			]],
-			{ i(1), p(os.date, "%Y-%m-%dT%H:%M:%S+0800"), i(2), i(3), i(4), i(0) }
-		),
-		{
-			condition = pos.on_top * conds_expand.line_begin,
-			show_condition = pos.on_top * pos.line_begin,
-		}
-	),
 	s(
 		{ trig = "fig", name = "Markdown figure", desc = "Add an image." },
 		fmt([[![{}]({} "{}")]], { i(1, "Figure"), i(2, "url"), i(3, "title") }),
