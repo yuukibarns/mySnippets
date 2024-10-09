@@ -2,7 +2,7 @@ local autosnips = {}
 local snips = {}
 local tex = require("mySnippets.latex")
 
-local opts = { condition = tex.in_math, show_condition = tex.in_math }
+local opts = { condition = tex.in_math, show_condition = tex.in_math, hidden = true }
 
 local function symbol_snippet(context, cmd)
 	context.desc = cmd
@@ -11,20 +11,7 @@ local function symbol_snippet(context, cmd)
 	context.wordTrig = false
 	return s(context, t(cmd), opts)
 end
-
-local function symbol_snippet2(context, cmd)
-	context.desc = cmd
-	context.name = context.name or cmd:gsub([[\]], "")
-	context.docstring = cmd .. [[{0}]]
-	context.wordTrig = true
-	return s(
-		context,
-		fmta([[<><><>]], { t("\\("), t(cmd), t("\\)") }),
-		{ condition = tex.in_text, show_condition = tex.in_text }
-	)
-end
-
-local function symbol_snippet_w(context, cmd)
+local function symbol_snippet_wordtrig_true(context, cmd)
 	context.desc = cmd
 	context.name = context.name or cmd:gsub([[\]], "")
 	context.docstring = cmd .. [[{0}]]
@@ -85,64 +72,20 @@ autosnips = {
 			return string.format("%s_{%s}", snip.captures[1], snip.captures[2])
 		end, {}),
 	}, opts),
-	s(
-		{ trig = "set", name = "set", desc = "set" },
-		fmta([[\{<>\}<>]], { c(1, { r(1, ""), sn(nil, { r(1, ""), t(" \\mid "), i(2) }) }), i(0) }),
-		opts
-	),
-	s(
-		{ trig = "Set", name = "Set", desc = "big set" },
-		fmta([[\left\{<>\right\}<>]], { c(1, { r(1, ""), sn(nil, { r(1, ""), t(" \\ \\bigg|\\ "), i(2) }) }), i(0) }),
-		opts
-	),
-	s({ trig = "<|", name = "triangleleft <|", wordTrig = false }, { t("\\triangleleft") }, opts),
-	s({ trig = "|>", name = "triangleright |>", wordTrig = false }, { t("\\triangleright") }, opts),
+
+	s({ trig = "set", name = "set", desc = "set" }, fmta([[\{<>\}<>]], { i(1), i(0) }), opts),
+
 	s(
 		{ trig = "^", name = "auto supscript", wordTrig = false, hidden = true },
 		fmta([[^{<>}<>]], { i(1), i(0) }),
 		opts
 	),
+
 	s(
 		{ trig = "_", name = "auto subscript", wordTrig = false, hidden = true },
 		fmta([[_{<>}<>]], { i(1), i(0) }),
 		opts
 	),
-	s({ trig = "&&", name = "align", wordTrig = false, hidden = true }, { t("& \\ ") }, opts),
-	s({ trig = "'([mnkij])", name = "mnkji derivatives", wordTrig = false, regTrig = true }, {
-		f(function(_, snip)
-			return "^{(" .. snip.captures[1] .. ")}"
-		end, {}),
-	}, opts),
-	s({ trig = "'(%d)", name = "number derivatives", wordTrig = false, regTrig = true }, {
-		f(function(_, snip)
-			return "^{(" .. snip.captures[1] .. ")}"
-		end, {}),
-	}, opts),
-	s({ trig = "(%a)ii", name = "alph i", wordTrig = true, regTrig = true, hidden = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. "_{i}"
-		end, {}),
-	}, opts),
-	s({ trig = "(%a)jj", name = "alph j", wordTrig = true, regTrig = true, hidden = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. "_{j}"
-		end, {}),
-	}, opts),
-	s({ trig = "(%a)kk", name = "alph k", wordTrig = true, regTrig = true, hidden = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. "_{k}"
-		end, {}),
-	}, opts),
-	s({ trig = "(%a)nn", name = "alph n", wordTrig = true, regTrig = true, hidden = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. "_{n}"
-		end, {}),
-	}, opts),
-	s({ trig = "(%a)mm", name = "alph m", wordTrig = true, regTrig = true, hidden = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. "_{m}"
-		end, {}),
-	}, opts),
 }
 
 local single_command_math_specs = {
@@ -170,7 +113,7 @@ local single_command_math_specs = {
 		context = { name = "mathrm", desc = "mathrm text" },
 		cmd = [[\mathrm]],
 	},
-	bx = {
+	box = {
 		context = { name = "boxed", desc = "boxed" },
 		cmd = [[\boxed]],
 	},
@@ -187,9 +130,21 @@ local single_command_math_specs = {
 		context = { name = "overline", desc = "overline" },
 		cmd = [[\overline]],
 	},
-	vc = {
+	vec = {
 		context = { name = "vector", desc = "vector" },
 		cmd = [[\vec]],
+	},
+	bra = {
+		context = { name = "vector", desc = "vector" },
+		cmd = [[\bra]],
+	},
+	ket = {
+		context = { name = "vector", desc = "vector" },
+		cmd = [[\ket]],
+	},
+	bket = {
+		context = { name = "vector", desc = "vector" },
+		cmd = [[\braket]],
 	},
 	bm = {
 		context = { name = "boldmath", desc = "boldmath" },
@@ -207,9 +162,21 @@ local single_command_math_specs = {
 		context = { name = "substack", desc = "substack for sums/products" },
 		cmd = [[\substack]],
 	},
+	dot = {
+		context = { name = "dot derivatives", desc = "physical derivatives" },
+		cmd = [[\dot]],
+	},
+	ddot = {
+		context = { name = "dot derivatives", desc = "physical derivatives" },
+		cmd = [[\ddot]],
+	},
+	dddot = {
+		context = { name = "dot derivatives", desc = "physical derivatives" },
+		cmd = [[\dddot]],
+	},
 }
 
-local symbol_specs_w = {
+local symbol_specs_wordtrig_true = {
 	--sets
 	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
 	CC = { context = { name = "ℂ" }, cmd = [[\mathbb{C}]] },
@@ -232,8 +199,6 @@ local symbol_specs_w = {
 	ww = { context = { name = "w" }, cmd = [[\wedge]] },
 	vv = { context = { name = "v" }, cmd = [[\vee]] },
 	nabl = { context = { name = "∇" }, cmd = [[\nabla]] },
-	-- dd = { context = { name = "diferential operator" }, cmd = [[\mathrm{d}]] },
-	-- ill = { context = { name = "imaginary number" }, cmd = [[\mathrm{i}]] },
 	cc = { context = { name = "⊆" }, cmd = [[\subseteq]] },
 	cq = { context = { name = "⊊" }, cmd = [[\subsetneq]] },
 	qq = { context = { name = "⊇" }, cmd = [[\supseteq]] },
@@ -246,6 +211,7 @@ local symbol_specs_w = {
 	dag = { context = { name = "†" }, cmd = [[\dagger]] },
 	bot = { context = { name = "|_" }, cmd = [[\bot]] },
 	wp = { context = { name = "Weierstrass p function" }, cmd = [[\wp]] },
+	hbar = { context = { name = "h bar" }, cmd = [[\hbar]] },
 	lll = { context = { name = "ℓ" }, cmd = [[\ell]] },
 	emb = { context = { name = "hookrightarrow" }, cmd = [[\hookrightarrow ]] },
 }
@@ -270,7 +236,7 @@ local symbol_specs = {
 	["=~"] = { context = { name = "≅" }, cmd = [[\cong]] },
 	["::"] = { context = { name = ":" }, cmd = [[\colon]] },
 	[":="] = { context = { name = "≔" }, cmd = [[\coloneqq]] },
-	["**"] = { context = { name = "*" }, cmd = [[^{*}]] },
+	-- ["**"] = { context = { name = "*" }, cmd = [[^{*}]] },
 	["..."] = { context = { name = "·" }, cmd = [[\dots]] },
 	["||"] = { context = { name = "|" }, cmd = [[\mid]] },
 	["!|"] = { context = { name = "!|" }, cmd = [[\nmid]] },
@@ -293,7 +259,6 @@ local symbol_specs = {
 	["!!>"] = { context = { name = "↦" }, cmd = [[\longmapsto]] },
 	["-->"] = { context = { name = "⟶", priority = 500 }, cmd = [[\longrightarrow]] },
 	["<->"] = { context = { name = "↔", priority = 500 }, cmd = [[\longleftrightarrow]] },
-	--["<-->"] = { context = { name = "⟷", priority = 600 }, cmd = [[\longleftrightarrow ]] },
 	["2>"] = { context = { name = "⇉", priority = 400 }, cmd = [[\rightrightarrows]] },
 	["/>"] = { context = { name = "/>" }, cmd = [[\nearrow]] },
 	["\\>"] = { context = { name = "\\>" }, cmd = [[\searrow]] },
@@ -331,7 +296,6 @@ local symbol_specs = {
 	[";S"] = { context = { name = "Sigma" }, cmd = [[\Sigma]] },
 	[";U"] = { context = { name = "Upsilon" }, cmd = [[\Upsilon]] },
 	[";F"] = { context = { name = "Phi" }, cmd = [[\Phi]] },
-	--	[";C"] = { context = { name = "Chi" }, cmd = [[\Chi]] },
 	[";Y"] = { context = { name = "Psi" }, cmd = [[\Psi]] },
 	[";W"] = { context = { name = "Omega" }, cmd = [[\Omega]] },
 	--var symbols
@@ -343,72 +307,8 @@ local symbol_specs = {
 	["\\quad  "] = { context = { name = "   " }, cmd = [[\qquad ]] },
 	[";3"] = { context = { name = "#" }, cmd = [[\#]] },
 }
-local symbol_specs2_w = {
-	-- sets
-	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
-	CC = { context = { name = "ℂ" }, cmd = [[\mathbb{C}]] },
-	DD = { context = { name = "𝔻" }, cmd = [[\mathbb{D}]] },
-	FF = { context = { name = "𝔽" }, cmd = [[\mathbb{F}]] },
-	GG = { context = { name = "𝔾" }, cmd = [[\mathbb{G}]] },
-	HH = { context = { name = "ℍ" }, cmd = [[\mathbb{H}]] },
-	NN = { context = { name = "ℕ" }, cmd = [[\mathbb{N}]] },
-	OO = { context = { name = "O" }, cmd = [[\mathcal{O}]] },
-	LL = { context = { name = "L" }, cmd = [[\mathcal{L}]] },
-	PP = { context = { name = "ℙ" }, cmd = [[\mathbb{P}]] },
-	QQ = { context = { name = "ℚ" }, cmd = [[\mathbb{Q}]] },
-	RR = { context = { name = "ℝ" }, cmd = [[\mathbb{R}]] },
-	ZZ = { context = { name = "ℤ" }, cmd = [[\mathbb{Z}]] },
-	iff = { context = { name = "<=>" }, cmd = [[\iff]] },
-}
-local symbol_specs2 = {
-	-- greek alphabet
-	[";a"] = { context = { name = "alpha" }, cmd = [[\alpha]] },
-	[";b"] = { context = { name = "beta" }, cmd = [[\beta]] },
-	[";g"] = { context = { name = "gamma" }, cmd = [[\gamma]] },
-	[";d"] = { context = { name = "delta" }, cmd = [[\delta]] },
-	[";e"] = { context = { name = "epsilon" }, cmd = [[\epsilon]] },
-	[";z"] = { context = { name = "zeta" }, cmd = [[\zeta]] },
-	[";h"] = { context = { name = "eta" }, cmd = [[\eta]] },
-	[";q"] = { context = { name = "theta" }, cmd = [[\theta]] },
-	[";i"] = { context = { name = "iota" }, cmd = [[\iota]] },
-	[";k"] = { context = { name = "kappa" }, cmd = [[\kappa]] },
-	[";l"] = { context = { name = "lambda" }, cmd = [[\lambda]] },
-	[";m"] = { context = { name = "mu" }, cmd = [[\mu]] },
-	[";n"] = { context = { name = "nu" }, cmd = [[\nu]] },
-	[";x"] = { context = { name = "xi" }, cmd = [[\xi]] },
-	[";p"] = { context = { name = "pi" }, cmd = [[\pi]] },
-	[";r"] = { context = { name = "rho" }, cmd = [[\rho]] },
-	[";s"] = { context = { name = "sigma" }, cmd = [[\sigma]] },
-	[";t"] = { context = { name = "tau" }, cmd = [[\tau]] },
-	[";u"] = { context = { name = "upsilon" }, cmd = [[\upsilon]] },
-	[";f"] = { context = { name = "phi" }, cmd = [[\phi]] },
-	[";c"] = { context = { name = "chi" }, cmd = [[\chi]] },
-	[";y"] = { context = { name = "psi" }, cmd = [[\psi]] },
-	[";w"] = { context = { name = "omega" }, cmd = [[\omega]] },
-	--capital symbols
-	[";G"] = { context = { name = "Gamma" }, cmd = [[\Gamma]] },
-	[";D"] = { context = { name = "Delta" }, cmd = [[\Delta]] },
-	[";Q"] = { context = { name = "Theta" }, cmd = [[\Theta]] },
-	[";L"] = { context = { name = "Lambda" }, cmd = [[\Lambda]] },
-	[";X"] = { context = { name = "Xi" }, cmd = [[\Xi]] },
-	[";P"] = { context = { name = "Pi" }, cmd = [[\Pi]] },
-	[";S"] = { context = { name = "Sigma" }, cmd = [[\Sigma]] },
-	[";U"] = { context = { name = "Upsilon" }, cmd = [[\Upsilon]] },
-	[";F"] = { context = { name = "Phi" }, cmd = [[\Phi]] },
-	--	[";C"] = { context = { name = "Chi" }, cmd = [[\Chi]] },
-	[";Y"] = { context = { name = "Psi" }, cmd = [[\Psi]] },
-	[";W"] = { context = { name = "Omega" }, cmd = [[\Omega]] },
-	--var symbols
-	[";1"] = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
-	[";2"] = { context = { name = "varphi" }, cmd = [[\varphi]] },
-	--arrows
-	["=>"] = { context = { name = "⇒" }, cmd = [[\implies]] },
-	["<=>"] = { context = { name = "⟺" }, cmd = [[\iff]] },
-	["=<"] = { context = { name = "⇐" }, cmd = [[\impliedby]] },
-}
-
 local symbol_snippets = {}
-local symbol_snippets2 = {}
+local symbol_snippets_manual = {}
 for k, v in pairs(single_command_math_specs) do
 	table.insert(
 		symbol_snippets,
@@ -416,21 +316,18 @@ for k, v in pairs(single_command_math_specs) do
 	)
 end
 
-for k, v in pairs(symbol_specs_w) do
-	table.insert(symbol_snippets, symbol_snippet_w(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
+for k, v in pairs(symbol_specs_wordtrig_true) do
+	table.insert(
+		symbol_snippets,
+		symbol_snippet_wordtrig_true(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd)
+	)
 end
 
 for k, v in pairs(symbol_specs) do
 	table.insert(symbol_snippets, symbol_snippet(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
 end
-for k, v in pairs(symbol_specs2_w) do
-	table.insert(symbol_snippets2, symbol_snippet2(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
-end
-for k, v in pairs(symbol_specs2) do
-	table.insert(symbol_snippets, symbol_snippet2(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd))
-end
 
 vim.list_extend(autosnips, symbol_snippets)
-vim.list_extend(snips, symbol_snippets2)
+vim.list_extend(snips, symbol_snippets_manual)
 
 return snips, autosnips

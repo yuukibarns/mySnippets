@@ -86,23 +86,7 @@ autosnips = {
 	),
 	s(
 		{
-			trig = ";,",
-			name = "angles",
-			desc = "angle delimiter",
-			wordTrig = false,
-			condition = tex.in_math,
-			show_condition = tex.in_math,
-		},
-		fmta(
-			[[
-			\langle <> \rangle<>
-			]],
-			{ i(1), i(0) }
-		)
-	),
-	s(
-		{
-			trig = ";\\",
+			trig = ";|",
 			name = "norm",
 			desc = "norm delimiter",
 			wordTrig = false,
@@ -118,7 +102,7 @@ autosnips = {
 	),
 	s(
 		{
-			trig = ";|",
+			trig = ";\\|",
 			name = "Norm",
 			desc = "Norm delimiter",
 			wordTrig = false,

@@ -1,4 +1,4 @@
-local snips, autosnips = {}, {}
+local autosnips = {}
 
 local tex = require("mySnippets.latex")
 
@@ -8,27 +8,28 @@ local function operator_snippet(trig)
 	return s({ trig = trig, name = trig }, t([[\]] .. trig), opts)
 end
 
-local function sequence_snippet(trig, cmd, desc)
+local function d_sequence_snippet(trig, cmd, desc)
 	return s(
-		{ trig = trig, name = desc, desc = desc },
-		fmta([[\<><><>]], {
+		{ trig = "d" .. trig, name = desc, desc = desc },
+		fmta([[\<>_{<>}^{<>}<>]], {
 			t(cmd),
-			c(1, { fmta([[_{<>}^{<>}]], { i(1, "i=0"), i(2, "\\infty") }), t("") }),
+			i(1, "i=0"),
+			i(2, "\\infty"),
 			i(0),
 		}),
 		opts
 	)
 end
 
-snips = {
-	-- s({
-	-- 	trig = "/",
-	-- 	name = "fraction",
-	-- 	desc = "Insert a fraction notation.",
-	-- 	wordTrig = false,
-	-- 	hidden = true,
-	-- }, fmta([[\frac{<>}{<>}<>]], { i(1), i(2), i(0) }), opts),
-}
+local function sequence_snippet(trig, cmd, desc)
+	return s(
+		{ trig = trig, name = desc, desc = desc },
+		fmta([[\<>]], {
+			t(cmd),
+		}),
+		opts
+	)
+end
 
 autosnips = {
 	s(
@@ -43,7 +44,6 @@ autosnips = {
 	),
 	s({ trig = "xla", name = "xleftarrow", desc = "xleftarrow." }, fmta([[\xleftarrow{<>}<>]], { i(1), i(0) }), opts),
 	s({ trig = "mod", name = "modula", desc = "= (mod I)." }, fmta([[\ (\mathrm{mod}\ <>)]], { i(1) }), opts),
-	-- fractions
 	s(
 		{ trig = "//", name = "fraction", desc = "fraction (general)" },
 		fmta([[\frac{<>}{<>}<>]], { i(1), i(2), i(0) }),
@@ -110,8 +110,12 @@ for k, v in pairs(sequence_specs) do
 	table.insert(autosnips, sequence_snippet(k, v[1], v[2]))
 end
 
+for k, v in pairs(sequence_specs) do
+	table.insert(autosnips, d_sequence_snippet(k, v[1], v[2]))
+end
+
 for _, v in ipairs(operator_specs) do
 	table.insert(autosnips, operator_snippet(v))
 end
 
-return snips, autosnips
+return nil, autosnips

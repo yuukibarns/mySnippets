@@ -12,21 +12,23 @@ local reference_snippet_table = {
 	r = "",
 }
 
-local opts = { condition = tex.in_text, show_condition = tex.in_text }
+local opts = { hidden = true, condition = tex.in_text, show_condition = tex.in_text }
 local opts2 = {
+	hidden = true,
 	condition = conds_expand.line_begin * tex.in_text,
 	show_condition = pos.line_begin * tex.in_text,
 }
 
-local function phrase_snippet(trig, body)
-	return s({ trig = trig, desc = trig }, t(body), opts)
-end
+-- local function phrase_snippet(trig, body)
+-- 	return s({ trig = trig, desc = trig }, t(body), opts)
+-- end
 
 snips = {
 	s(
 		{
 			trig = "cf",
 			name = "cross refrence",
+			hidden = true,
 			condition = tex.in_text,
 			show_condition = tex.in_text,
 		},
@@ -46,111 +48,6 @@ snips = {
 }
 
 autosnips = {
-	s(
-		{
-			trig = ";'",
-			wordTrig = false,
-			name = "Poincar_e",
-			desc = "Poincar_e",
-		},
-		fmta(
-			[[
-			  \'{<>}<>
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";.",
-			wordTrig = false,
-			name = "H_older",
-			desc = "H_older",
-		},
-		fmta(
-			[[
-			 \"{<>}<>
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";,",
-			wordTrig = false,
-			name = "Ces_aro",
-			desc = "Ces_aro",
-		},
-		fmta(
-			[[
-			 \`{<>}<>
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";/",
-			wordTrig = false,
-			name = "Erd_os",
-			desc = "Erd_os",
-		},
-		fmta(
-			[[
-			 \H{<>}<>
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	-- s(
-	-- 	{
-	-- 		trig = "``",
-	-- 		wordTrig = false,
-	-- 		name = "``''",
-	-- 		desc = "double quotation marks.",
-	-- 	},
-	-- 	fmta(
-	-- 		[[
-	-- 		 ``<>''<>
-	-- 		]],
-	-- 		{ i(1), i(0) }
-	-- 	),
-	-- 	opts
-	-- ),
-	s(
-		{
-			trig = "''",
-			wordTrig = false,
-			name = "``''",
-			desc = "single quotation marks",
-		},
-		fmta(
-			[[
-			 ``<>''<>
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
-	s(
-		{
-			trig = ";o",
-			wordTrig = true,
-			name = "()",
-			desc = "parentheses",
-		},
-		fmta(
-			[[
-			(<>)<> 
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
 	s(
 		{
 			trig = "([acC])ref",
@@ -196,29 +93,29 @@ autosnips = {
 	}, opts2),
 }
 
-local phrase_specs = {
-	-- cf = "cf.~",
-	--ses = "short exact sequence",
-	--klt = "Kawamata log terminal",
-}
+-- local phrase_specs = {
+-- 	cf = "cf.~",
+-- 	ses = "short exact sequence",
+-- 	klt = "Kawamata log terminal",
+-- }
+--
+-- local auto_phrase_specs = {
+-- 	iee = "i.e., ",
+-- 	egg = "e.g., ",
+-- 	stt = "such that",
+-- 	--resp = "resp.\\ ",
+-- 	iff = "\\(\\iff\\)",
+-- 	wrt = "with respect to ",
+-- 	nbhd = "neighbourhood",
+-- 	tfae = "the following are equivalent",
+-- 	ctd = "\\textbf{Contradiction}",
+-- }
 
-local auto_phrase_specs = {
-	iee = "i.e., ",
-	egg = "e.g., ",
-	stt = "such that",
-	--resp = "resp.\\ ",
-	iff = "\\(\\iff\\)",
-	wrt = "with respect to ",
-	nbhd = "neighbourhood",
-	tfae = "the following are equivalent",
-	ctd = "\\textbf{Contradiction}",
-}
-
-for k, v in pairs(phrase_specs) do
-	table.insert(snips, phrase_snippet(k, v))
-end
-for k, v in pairs(auto_phrase_specs) do
-	table.insert(autosnips, phrase_snippet(k, v))
-end
+-- for k, v in pairs(phrase_specs) do
+-- 	table.insert(snips, phrase_snippet(k, v))
+-- end
+-- for k, v in pairs(auto_phrase_specs) do
+-- 	table.insert(autosnips, phrase_snippet(k, v))
+-- end
 
 return snips, autosnips

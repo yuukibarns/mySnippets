@@ -11,9 +11,10 @@ end
 local function d_sequence_snippet(trig, cmd, desc)
 	return s(
 		{ trig = "d" .. trig, name = desc, desc = desc },
-		fmta([[\<><><>]], {
+		fmta([[\<>_{<>}^{<>}<>]], {
 			t(cmd),
-			c(1, { fmta([[_{<>}^{<>}]], { i(1, "i=0"), i(2, "\\infty") }), t("") }),
+			i(1, "i=0"),
+			i(2, "\\infty"),
 			i(0),
 		}),
 		opts
@@ -108,8 +109,8 @@ local operator_specs = {
 	"lim",
 	"Re",
 	"Im",
-	-- "perp",
-	-- "star",
+	"arg",
+	"star",
 }
 
 for k, v in pairs(sequence_specs) do

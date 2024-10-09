@@ -4,11 +4,6 @@ local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("mySnippets.markdown")
 local pos = require("mySnippets.position")
 
-local opts = {
-	condition = conds_expand.line_begin * tex.in_math,
-	show_condition = pos.line_begin * tex.in_math,
-}
-
 -- Generating function for LaTeX environments like matrix and cases
 local function generate_env(rows, cols, default_cols)
 	cols = cols or default_cols
@@ -48,6 +43,7 @@ snips = {
 			name = "[bBpvVa]matrix",
 			desc = "matrices",
 			regTrig = true,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -106,6 +102,7 @@ autosnips = {
 			trig = "bal",
 			name = "aligned",
 			desc = "align math",
+			hidden = true,
 		},
 		fmta(
 			[[
@@ -115,47 +112,35 @@ autosnips = {
 			]],
 			{ i(0) }
 		),
-		opts
+		{
+			condition = conds_expand.line_begin * tex.in_math,
+			show_condition = pos.line_begin * tex.in_math,
+		}
 	),
 
 	s(
 		{
-			trig = "bfu",
-			name = "function",
+			trig = "equ",
+			name = "equations",
+			desc = "system of equations",
+			hidden = true,
 		},
 		fmta(
 			[[
+			$$
+			\left\lbrace
 			\begin{aligned}
 			<>
 			\end{aligned}
+			\right.
+			$$
 			]],
-			{
-				c(1, {
-					fmta(
-						[[
-						<> \colon <> & \longrightarrow <>\\
-						<> & \longmapsto <>
-						]],
-						{ i(1), i(2), i(3), i(4), i(5) }
-					),
-					fmta(
-						[[
-						<> & \longrightarrow <>\\
-						<> & \longmapsto <>	
-						]],
-						{ i(1), i(2), i(3), i(4) }
-					),
-					fmta(
-						[[
-						<> & \leftrightarrow <>\\
-						<> & \leftrightarrow <>
-						]],
-						{ i(1), i(2), i(3), i(4) }
-					),
-				}),
-			}
+			{ i(0) }
 		),
-		opts
+		{
+			condition = conds_expand.line_begin,
+			show_condition = pos.line_begin,
+		}
 	),
 }
 

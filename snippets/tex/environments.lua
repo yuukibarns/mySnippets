@@ -7,6 +7,7 @@ local pos = require("mySnippets.position")
 local opts = {
 	condition = conds_expand.line_begin * tex.in_text,
 	show_condition = pos.line_begin * tex.in_text,
+	hidden = true,
 }
 
 -- Generating function for LaTeX environments like matrix and cases
@@ -108,6 +109,7 @@ snips = {
 			name = "[bBpvVa]matrix",
 			desc = "matrices",
 			regTrig = true,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -150,6 +152,7 @@ autosnips = {
 			trig = "beg",
 			name = "begin/end",
 			desc = "begin/end environment (generic)",
+			hidden = true,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -167,6 +170,7 @@ autosnips = {
 			trig = "fig",
 			name = "figure/end",
 			desc = "figure/end environment (generic)",
+			hidden = true,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -184,7 +188,7 @@ autosnips = {
 		)
 	),
 	s(
-		{ trig = "lprf", name = "Titled Proof", desc = "Create a titled proof environment." },
+		{ trig = "lproof", name = "Titled Proof", desc = "Create a titled proof environment." },
 		fmta(
 			[[
 			\begin{proof}[Proof of <>]
@@ -206,6 +210,7 @@ autosnips = {
 			{ d(1, generate_cases) }
 		),
 		{
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		}
@@ -256,6 +261,7 @@ autosnips = {
 			trig = "bal",
 			name = "align(|*|ed)",
 			desc = "align math",
+			hidden = true,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -268,51 +274,12 @@ autosnips = {
 			{ c(1, { t("*"), t(""), t("ed") }), i(0), rep(1) }
 		)
 	),
-	-- s(
-	-- 	{
-	-- 		trig = "bfu",
-	-- 		name = "function",
-	-- 		condition = conds_expand.line_begin,
-	-- 		show_condition = pos.line_begin,
-	-- 	},
-	-- 	fmta(
-	-- 		[[
-	-- 	\begin{align*}
-	-- 		<>
-	-- 	\end{align*}
-	-- 	]],
-	-- 		{
-	-- 			c(1, {
-	-- 				fmta(
-	-- 					[[
-	-- 					<> \colon <> & \longrightarrow <>\\
-	-- 					<> & \longmapsto <>
-	-- 					]],
-	-- 					{ i(1), i(2), i(3), i(4), i(5) }
-	-- 				),
-	-- 				fmta(
-	-- 					[[
-	-- 					<> & \longrightarrow <>\\
-	-- 					<> & \longmapsto <>
-	-- 					]],
-	-- 					{ i(1), i(2), i(3), i(4) }
-	-- 				),
-	-- 				fmta(
-	-- 					[[
-	-- 					<> & \leftrightarrow <>\\
-	-- 					<> & \leftrightarrow <>
-	-- 					]],
-	-- 					{ i(1), i(2), i(3), i(4) }
-	-- 				),
-	-- 			}),
-	-- 		}
-	-- 	)
-	-- ),
 	s(
 		{
 			trig = "beq",
 			name = "begin labeled_equation",
 			desc = "labeled_equation",
+			hidden = true,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -330,6 +297,7 @@ autosnips = {
 			trig = "bleq",
 			name = "begin labeled_equation",
 			desc = "labeled_equation",
+			hidden = true,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -345,8 +313,6 @@ autosnips = {
 }
 
 local env_specs = {
-	--beq = "equation",
-	--bseq = "equation*",
 	proof = "proof",
 }
 

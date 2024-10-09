@@ -5,6 +5,7 @@ local tex = require("mySnippets.latex")
 local pos = require("mySnippets.position")
 
 local opts = {
+	hidden = true,
 	condition = conds_expand.line_begin * tex.in_text,
 	show_condition = pos.line_begin * tex.in_text,
 }
