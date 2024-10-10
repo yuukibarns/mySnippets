@@ -2,7 +2,8 @@ local autosnips = {}
 local snips = {}
 local tex = require("mySnippets.markdown")
 
-local opts = { condition = tex.in_math, show_condition = tex.in_math }
+local opts = { condition = tex.in_math }
+local opts_show = { condition = tex.in_math, show_condition = tex.in_math }
 
 local function symbol_snippet(context, cmd)
 	context.desc = cmd
@@ -10,7 +11,7 @@ local function symbol_snippet(context, cmd)
 	context.docstring = cmd .. [[{0}]]
 	context.wordTrig = false
 	context.hidden = true
-	return s(context, t(cmd), opts)
+	return s(context, t(cmd), opts_show)
 end
 
 local function symbol_snippet_wordtrig_true(context, cmd)
@@ -46,12 +47,12 @@ autosnips = {
 	s(
 		{ trig = '"', name = "auto supscript", wordTrig = false, hidden = true },
 		fmta([[^{<>}<>]], { i(1), i(0) }),
-		opts
+		opts_show
 	),
 	s(
 		{ trig = "_", name = "auto subscript", wordTrig = false, hidden = true },
 		fmta([[_{<>}<>]], { i(1), i(0) }),
-		opts
+		opts_show
 	),
 }
 
@@ -60,23 +61,27 @@ local single_command_math_specs = {
 		context = { name = "text (math)", desc = "text in math mode" },
 		cmd = [[\text]],
 	},
-	mbb = {
+	mathbb = {
 		context = { name = "mathbb", desc = "mathbb text" },
 		cmd = [[\mathbb]],
 	},
-	mcl = {
+	mathcal = {
 		context = { name = "mathcal", desc = "mathcal text" },
 		cmd = [[\mathcal]],
 	},
-	msr = {
+	mathscr = {
 		context = { name = "mathscr", desc = "mathscr text" },
 		cmd = [[\mathscr]],
 	},
-	mfk = {
+	mathfrak = {
 		context = { name = "mathfrak", desc = "mathfrak text" },
 		cmd = [[\mathfrak]],
 	},
-	mrm = {
+	bm = {
+		context = { name = "bm", desc = "bold math text" },
+		cmd = [[\bm]],
+	},
+	mathrm = {
 		context = { name = "mathrm", desc = "mathrm text" },
 		cmd = [[\mathrm]],
 	},
@@ -105,7 +110,7 @@ local single_command_math_specs = {
 		context = { name = "tilde", desc = "wide tilde" },
 		cmd = [[\widetilde]],
 	},
-	mathring = {
+	ring = {
 		context = { name = "mathring", desc = "mathring" },
 		cmd = [[\mathring]],
 	},
@@ -113,11 +118,11 @@ local single_command_math_specs = {
 		context = { name = "substack", desc = "substack for sums/products" },
 		cmd = [[\substack]],
 	},
-	xrarr = {
+	xrightarrow = {
 		context = { name = "xrightarrow", desc = "xrightarrow" },
 		cmd = [[\xrightarrow]],
 	},
-	xlarr = {
+	xleftarrow = {
 		context = { name = "xleftarrow", desc = "xleftarrow" },
 		cmd = [[\xleftarrow]],
 	},
@@ -140,6 +145,8 @@ local single_command_math_specs = {
 }
 
 local symbol_specs_wordtrig_true = {
+	-- not
+	["not"] = { context = { name = "not" }, cmd = [[\not]] },
 	-- sets
 	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
 	CC = { context = { name = "ℂ" }, cmd = [[\mathbb{C}]] },
@@ -160,12 +167,12 @@ local symbol_specs_wordtrig_true = {
 	wedge = { context = { name = "w" }, cmd = [[\wedge]] },
 	vee = { context = { name = "v" }, cmd = [[\vee]] },
 	nabla = { context = { name = "∇" }, cmd = [[\nabla]] },
-	cc = { context = { name = "⊂" }, cmd = [[\subset]] },
-	qq = { context = { name = "⊃" }, cmd = [[\supset]] },
-	notcc = { context = { name = "not⊂" }, cmd = [[\not\supset]] },
-	notqq = { context = { name = "not⊃" }, cmd = [[\not\supset]] },
+	subset = { context = { name = "⊂" }, cmd = [[\subset]] },
+	supset = { context = { name = "⊃" }, cmd = [[\supset]] },
 	cap = { context = { name = "∩" }, cmd = [[\cap]] },
 	cup = { context = { name = "∪" }, cmd = [[\cup]] },
+	sqcap = { context = { name = "⊓" }, cmd = [[\sqcap]] },
+	sqcup = { context = { name = "⊔" }, cmd = [[\sqcup]] },
 	dagger = { context = { name = "†" }, cmd = [[\dagger]] },
 	bot = { context = { name = "⊥" }, cmd = [[\bot]] },
 	wp = { context = { name = "℘" }, cmd = [[\wp]] },
@@ -175,54 +182,63 @@ local symbol_specs_wordtrig_true = {
 	ast = { context = { name = "∗" }, cmd = [[\ast]] },
 	mid = { context = { name = "∗" }, cmd = [[\mid]] },
 	nmid = { context = { name = "!|" }, cmd = [[\nmid]] },
-	part = { context = { name = "∂" }, cmd = [[\partial]] },
+	partial = { context = { name = "∂" }, cmd = [[\partial]] },
 	infty = { context = { name = "∞" }, cmd = [[\infty]] },
+	--var symbols
+	vartheta = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
+	varphi = { context = { name = "varphi" }, cmd = [[\varphi]] },
 	-- equality
 	leq = { context = { name = "≤" }, cmd = [[\leq]] },
 	geq = { context = { name = "≥" }, cmd = [[\geq]] },
 	neq = { context = { name = "≠" }, cmd = [[\neq]] },
-	coloneq = { context = { name = "≔" }, cmd = [[\coloneqq]] },
+	coloneqq = { context = { name = "≔" }, cmd = [[\coloneqq]] },
 	cong = { context = { name = "≅" }, cmd = [[\cong]] },
 	equiv = { context = { name = "≡" }, cmd = [[\equiv]] },
 	sim = { context = { name = "~" }, cmd = [[\sim]] },
 	-- arrows
-	uparr = { context = { name = "↑" }, cmd = [[\uparrow]] },
-	downarr = { context = { name = "↓" }, cmd = [[\downarrow]] },
-	nearr = { context = { name = "↗" }, cmd = [[\nearrow]] },
-	searr = { context = { name = "↘" }, cmd = [[\searrow]] },
-	hookarr = { context = { name = "↪" }, cmd = [[\hookrightarrow]] },
+	uparrow = { context = { name = "↑" }, cmd = [[\uparrow]] },
+	downarrow = { context = { name = "↓" }, cmd = [[\downarrow]] },
+	nearrow = { context = { name = "↗" }, cmd = [[\nearrow]] },
+	searrow = { context = { name = "↘" }, cmd = [[\searrow]] },
+	hookrightarrow = { context = { name = "↪" }, cmd = [[\hookrightarrow]] },
 	iff = { context = { name = "⟺" }, cmd = [[\iff]] },
 	implies = { context = { name = "⇒" }, cmd = [[\implies]] },
-	implied = { context = { name = "⇐" }, cmd = [[\impliedby]] },
+	impliedby = { context = { name = "⇐" }, cmd = [[\impliedby]] },
 	to = { context = { name = "→" }, cmd = [[\to]] },
-	notto = { context = { name = "not→" }, cmd = [[\not\to]] },
-	dash = { context = { name = "⟶" }, cmd = [[\longrightarrow]] },
+	leftarrow = { context = { name = "←" }, cmd = [[\leftarrow]] },
+	longleftrightarrow = { context = { name = "↔" }, cmd = [[\longleftrightarrow]] },
+	longrightarrow = { context = { name = "⟶" }, cmd = [[\longrightarrow]] },
+	rightrightarrows = { context = { name = "⇉" }, cmd = [[\rightrightarrows]] },
 	mapsto = { context = { name = "↦" }, cmd = [[\mapsto]] },
 	longmapsto = { context = { name = "↦" }, cmd = [[\longmapsto]] },
 	-- numbers
 	one = { context = { name = "1" }, cmd = [[1]] },
-	two = { context = { name = "1" }, cmd = [[2]] },
-	three = { context = { name = "1" }, cmd = [[3]] },
-	four = { context = { name = "1" }, cmd = [[4]] },
-	five = { context = { name = "1" }, cmd = [[5]] },
-	six = { context = { name = "1" }, cmd = [[6]] },
-	seven = { context = { name = "1" }, cmd = [[7]] },
-	eight = { context = { name = "1" }, cmd = [[8]] },
-	nine = { context = { name = "1" }, cmd = [[9]] },
-	zero = { context = { name = "1" }, cmd = [[0]] },
-	--basic symbols
+	two = { context = { name = "2" }, cmd = [[2]] },
+	three = { context = { name = "3" }, cmd = [[3]] },
+	four = { context = { name = "4" }, cmd = [[4]] },
+	five = { context = { name = "5" }, cmd = [[5]] },
+	six = { context = { name = "6" }, cmd = [[6]] },
+	seven = { context = { name = "7" }, cmd = [[7]] },
+	eight = { context = { name = "8" }, cmd = [[8]] },
+	nine = { context = { name = "9" }, cmd = [[9]] },
+	zero = { context = { name = "0" }, cmd = [[0]] },
+	-- basic symbols
 	amper = { context = { name = "&" }, cmd = [[&]] },
-	pipe = { context = { name = "|" }, cmd = [[|]] },
 	pound = { context = { name = "#" }, cmd = [[\#]] },
+	pipe = { context = { name = "|" }, cmd = [[|]] },
+	eqq = { context = { name = "=" }, cmd = [[=]] },
+	add = { context = { name = "+" }, cmd = [[+]] },
+	-- spaces
+	space = { context = { name = " " }, cmd = [[\ ]] },
+	quad = { context = { name = "  " }, cmd = [[\quad]] },
+	qquad = { context = { name = "   " }, cmd = [[\qquad]] },
 }
 
 local symbol_specs = {
 	-- logic
 	[";I"] = { context = { name = "∈" }, cmd = [[\in]] },
-	["!I"] = { context = { name = "∉" }, cmd = [[\notin]] },
 	[";A"] = { context = { name = "∀" }, cmd = [[\forall]] },
 	[";E"] = { context = { name = "∃" }, cmd = [[\exists]] },
-	["!E"] = { context = { name = "!∃" }, cmd = [[\nexists]] },
 	-- operators
 	["<<"] = { context = { name = "<<" }, cmd = [[\ll]] },
 	[">>"] = { context = { name = ">>" }, cmd = [[\gg]] },
@@ -234,10 +250,6 @@ local symbol_specs = {
 	[";-"] = { context = { name = "⧵" }, cmd = [[\setminus]] },
 	-- sets
 	[";0"] = { context = { name = "Ø" }, cmd = [[\emptyset]] },
-	-- arrows
-	["<-"] = { context = { name = "←", priority = 250 }, cmd = [[\leftarrow]] },
-	["<->"] = { context = { name = "↔", priority = 500 }, cmd = [[\longleftrightarrow]] },
-	["2>"] = { context = { name = "⇉", priority = 400 }, cmd = [[\rightrightarrows]] },
 	-- greek alphabet
 	[";a"] = { context = { name = "alpha" }, cmd = [[\alpha]] },
 	[";b"] = { context = { name = "beta" }, cmd = [[\beta]] },
@@ -274,12 +286,6 @@ local symbol_specs = {
 	[";F"] = { context = { name = "Phi" }, cmd = [[\Phi]] },
 	[";Y"] = { context = { name = "Psi" }, cmd = [[\Psi]] },
 	[";W"] = { context = { name = "Omega" }, cmd = [[\Omega]] },
-	--var symbols
-	[";1"] = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
-	[";2"] = { context = { name = "varphi" }, cmd = [[\varphi]] },
-	-- etc
-	["\\  "] = { context = { name = "  " }, cmd = [[\quad ]] },
-	["\\quad  "] = { context = { name = "   " }, cmd = [[\qquad ]] },
 }
 
 local symbol_snippets = {}

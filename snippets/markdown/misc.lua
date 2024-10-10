@@ -1,3 +1,4 @@
+-- local cmp = require("cmp")
 local autosnips = {}
 
 local conds_expand = require("luasnip.extras.conditions.expand")

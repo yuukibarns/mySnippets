@@ -23,7 +23,7 @@ end
 autosnips = {
 	s(
 		{
-			trig = "([l.])([r.])([abcemnp])",
+			trig = "lr([abcemnp])",
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,
@@ -34,21 +34,13 @@ autosnips = {
 		},
 		fmta([[\left<><>\right<><>]], {
 			f(function(_, snip)
-				if snip.captures[1] == "." then
-					return "."
-				else
-					local cap = snip.captures[3] or "p"
+					local cap = snip.captures[1] or "p"
 					return brackets[cap][1]
-				end
 			end),
 			d(1, get_visual),
 			f(function(_, snip)
-				if snip.captures[2] == "." then
-					return "."
-				else
-					local cap = snip.captures[3] or "p"
+					local cap = snip.captures[1] or "p"
 					return brackets[cap][2]
-				end
 			end),
 			i(0),
 		})

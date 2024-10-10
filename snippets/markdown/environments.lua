@@ -39,7 +39,7 @@ end
 snips = {
 	s(
 		{
-			trig = "([bBpvVa])mat_(%d+)x_(%d+)",
+			trig = "([bBpvVa])mat(%d+)x(%d+)",
 			name = "[bBpvVa]matrix",
 			desc = "matrices",
 			regTrig = true,
@@ -113,6 +113,30 @@ autosnips = {
 		{
 			condition = conds_expand.line_begin * tex.in_math,
 			show_condition = pos.line_begin * tex.in_math,
+		}
+	),
+	s(
+		{
+			trig = "equations",
+			name = "equations",
+			desc = "system of equations",
+			hidden = false,
+		},
+		fmta(
+			[[
+			$$
+			\left\lbrace
+			\begin{aligned}
+			<>
+			\end{aligned}
+			\right.
+			$$
+			]],
+			{ i(0) }
+		),
+		{
+			condition = conds_expand.line_begin,
+			show_condition = pos.line_begin,
 		}
 	),
 }
