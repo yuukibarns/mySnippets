@@ -229,7 +229,6 @@ local symbol_specs_wordtrig_true = {
 	eqq = { context = { name = "=" }, cmd = [[=]] },
 	add = { context = { name = "+" }, cmd = [[+]] },
 	-- spaces
-	space = { context = { name = " " }, cmd = [[\ ]] },
 	quad = { context = { name = "  " }, cmd = [[\quad]] },
 	qquad = { context = { name = "   " }, cmd = [[\qquad]] },
 }

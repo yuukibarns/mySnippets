@@ -10,8 +10,15 @@ end
 
 autosnips = {
 	s(
-		{ trig = "frac", name = "fraction", desc = "fraction (general)", hidden = false },
+		{ trig = "over", name = "fraction", desc = "fraction (general)", hidden = false },
 		fmta([[\frac{<>}{<>}<>]], { i(1), i(2), i(0) }),
+		opts
+	),
+	s(
+		{ trig = "(%w)over", name = "over", desc = "auto fraction", hidden = true, regTrig = true },
+		fmta([[\frac{<>}{<>}<>]], { f(function(_, snip)
+			return snip.captures[1]
+		end), i(1), i(0) }),
 		opts
 	),
 	s({ trig = "binom", name = "binomial", desc = "binomial", hidden = false }, fmta([[\binom{<>}{<>}<>]], { i(1), i(2), i(0) }), opts),

@@ -25,7 +25,7 @@ end
 local generate_matrix = function(_, snip)
 	local nodes = generate_env(tonumber(snip.captures[2]), tonumber(snip.captures[3]))
 	-- fix last node.
-	nodes[#nodes] = t("\\\\")
+	table.remove(nodes, #nodes)
 	return sn(nil, nodes)
 end
 
@@ -50,7 +50,7 @@ snips = {
 		fmta(
 			[[
 			\begin{<>}<>
-				<>
+			<>
 			\end{<>}
 			]],
 			{
@@ -77,9 +77,6 @@ snips = {
 			}
 		)
 	),
-}
-
-autosnips = {
 	s(
 		{ trig = "(%d+)cases", name = "cases(math)", desc = "cases(math)", regTrig = true, hidden = true },
 		fmta(
@@ -93,26 +90,6 @@ autosnips = {
 		{
 			condition = tex.in_math,
 			show_condition = tex.in_math,
-		}
-	),
-	s(
-		{
-			trig = "bal",
-			name = "aligned",
-			desc = "align math",
-			hidden = true,
-		},
-		fmta(
-			[[
-			\begin{aligned}
-			<>
-			\end{aligned}
-			]],
-			{ i(0) }
-		),
-		{
-			condition = conds_expand.line_begin * tex.in_math,
-			show_condition = pos.line_begin * tex.in_math,
 		}
 	),
 	s(
@@ -137,6 +114,29 @@ autosnips = {
 		{
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
+		}
+	),
+}
+
+autosnips = {
+	s(
+		{
+			trig = "bal",
+			name = "aligned",
+			desc = "align math",
+			hidden = true,
+		},
+		fmta(
+			[[
+			\begin{aligned}
+			<>
+			\end{aligned}
+			]],
+			{ i(0) }
+		),
+		{
+			condition = conds_expand.line_begin * tex.in_math,
+			show_condition = pos.line_begin * tex.in_math,
 		}
 	),
 }
