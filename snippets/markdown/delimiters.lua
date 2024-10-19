@@ -10,6 +10,7 @@ local brackets = {
 	m = { "|", "|" },
 	n = { "\\|", "\\|" },
 	p = { "(", ")" },
+	v = { ".", "|" },
 }
 
 local function get_visual(_, parent)
@@ -23,13 +24,12 @@ end
 autosnips = {
 	s(
 		{
-			trig = "lr([abcemnp])",
+			trig = "lr([abcemnpv])",
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,
 			wordTrig = true,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 			hidden = true,
 		},
 		fmta([[\left<><>\right<><>]], {
@@ -47,13 +47,12 @@ autosnips = {
 	),
 	s(
 		{
-			trig = ";(",
+			trig = ";o",
 			name = "parentheses",
 			desc = "parenthese delimiter",
 			wordTrig = false,
 			hidden = true,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
@@ -68,9 +67,8 @@ autosnips = {
 			name = "brackets",
 			desc = "bracket delimiter",
 			wordTrig = false,
-			hidden = true,
+			hidden = false,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
@@ -85,9 +83,8 @@ autosnips = {
 			name = "braces",
 			desc = "brace delimiter",
 			wordTrig = false,
-			hidden = true,
+			hidden = false,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
@@ -98,13 +95,12 @@ autosnips = {
 	),
 	s(
 		{
-			trig = ";|",
+			trig = "abs",
 			name = "norm",
 			desc = "norm delimiter",
-			wordTrig = false,
-			hidden = true,
+			wordTrig = true,
+			hidden = false,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
@@ -115,13 +111,12 @@ autosnips = {
 	),
 	s(
 		{
-			trig = ";\\|",
+			trig = "norm",
 			name = "Norm",
 			desc = "Norm delimiter",
-			wordTrig = false,
-			hidden = true,
+			wordTrig = true,
+			hidden = false,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
@@ -137,7 +132,6 @@ autosnips = {
 			wordTrig = true,
 			hidden = true,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
@@ -153,7 +147,6 @@ autosnips = {
 			wordTrig = false,
 			hidden = true,
 			condition = tex.in_math,
-			show_condition = tex.in_math,
 		},
 		fmta(
 			[[

@@ -50,7 +50,7 @@ autosnips = {
 		opts_show
 	),
 	s(
-		{ trig = "_", name = "auto subscript", wordTrig = false, hidden = true },
+		{ trig = "?", name = "auto subscript", wordTrig = false, hidden = true },
 		fmta([[_{<>}<>]], { i(1), i(0) }),
 		opts_show
 	),
@@ -145,7 +145,6 @@ local single_command_math_specs = {
 }
 
 local symbol_specs_wordtrig_true = {
-	-- not
 	["not"] = { context = { name = "not" }, cmd = [[\not]] },
 	-- sets
 	AA = { context = { name = "𝔸" }, cmd = [[\mathbb{A}]] },
@@ -169,6 +168,7 @@ local symbol_specs_wordtrig_true = {
 	nabla = { context = { name = "∇" }, cmd = [[\nabla]] },
 	subset = { context = { name = "⊂" }, cmd = [[\subset]] },
 	supset = { context = { name = "⊃" }, cmd = [[\supset]] },
+	setminus = { context = { name = "⧵" }, cmd = [[\setminus]] },
 	cap = { context = { name = "∩" }, cmd = [[\cap]] },
 	cup = { context = { name = "∪" }, cmd = [[\cup]] },
 	sqcap = { context = { name = "⊓" }, cmd = [[\sqcap]] },
@@ -184,9 +184,6 @@ local symbol_specs_wordtrig_true = {
 	nmid = { context = { name = "!|" }, cmd = [[\nmid]] },
 	partial = { context = { name = "∂" }, cmd = [[\partial]] },
 	infty = { context = { name = "∞" }, cmd = [[\infty]] },
-	--var symbols
-	vartheta = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
-	varphi = { context = { name = "varphi" }, cmd = [[\varphi]] },
 	-- equality
 	leq = { context = { name = "≤" }, cmd = [[\leq]] },
 	geq = { context = { name = "≥" }, cmd = [[\geq]] },
@@ -202,8 +199,8 @@ local symbol_specs_wordtrig_true = {
 	searrow = { context = { name = "↘" }, cmd = [[\searrow]] },
 	hookrightarrow = { context = { name = "↪" }, cmd = [[\hookrightarrow]] },
 	iff = { context = { name = "⟺" }, cmd = [[\iff]] },
-	implies = { context = { name = "⇒" }, cmd = [[\implies]] },
-	impliedby = { context = { name = "⇐" }, cmd = [[\impliedby]] },
+	Rightarrow = { context = { name = "⇒" }, cmd = [[\Rightarrow]] },
+	Leftarrow = { context = { name = "⇐" }, cmd = [[\Leftarrow]] },
 	to = { context = { name = "→" }, cmd = [[\to]] },
 	leftarrow = { context = { name = "←" }, cmd = [[\leftarrow]] },
 	longleftrightarrow = { context = { name = "↔" }, cmd = [[\longleftrightarrow]] },
@@ -225,10 +222,12 @@ local symbol_specs_wordtrig_true = {
 	-- basic symbols
 	amper = { context = { name = "&" }, cmd = [[&]] },
 	pound = { context = { name = "#" }, cmd = [[\#]] },
-	pipe = { context = { name = "|" }, cmd = [[|]] },
-	eqq = { context = { name = "=" }, cmd = [[=]] },
-	add = { context = { name = "+" }, cmd = [[+]] },
+	pip = { context = { name = "|" }, cmd = [[|]] },
+	eql = { context = { name = "=" }, cmd = [[=]] },
+	["and"] = { context = { name = "+" }, cmd = [[+]] },
+	les = { context = { name = "-" }, cmd = [[-]] },
 	-- spaces
+	spa = { context = { name = " " }, cmd = [[\]] },
 	quad = { context = { name = "  " }, cmd = [[\quad]] },
 	qquad = { context = { name = "   " }, cmd = [[\qquad]] },
 }
@@ -246,7 +245,6 @@ local symbol_specs = {
 	[";."] = { context = { name = "·" }, cmd = [[\cdot]] },
 	[";<"] = { context = { name = "⟨" }, cmd = [[\langle]] },
 	[";>"] = { context = { name = "⟩" }, cmd = [[\rangle]] },
-	[";-"] = { context = { name = "⧵" }, cmd = [[\setminus]] },
 	-- sets
 	[";0"] = { context = { name = "Ø" }, cmd = [[\emptyset]] },
 	-- greek alphabet
@@ -285,10 +283,14 @@ local symbol_specs = {
 	[";F"] = { context = { name = "Phi" }, cmd = [[\Phi]] },
 	[";Y"] = { context = { name = "Psi" }, cmd = [[\Psi]] },
 	[";W"] = { context = { name = "Omega" }, cmd = [[\Omega]] },
+	--var symbols
+	[";vq"] = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
+	[";vf"] = { context = { name = "varphi" }, cmd = [[\varphi]] },
 }
 
 local symbol_snippets = {}
 local symbol_snippets_manual = {}
+
 for k, v in pairs(single_command_math_specs) do
 	table.insert(
 		symbol_snippets,
