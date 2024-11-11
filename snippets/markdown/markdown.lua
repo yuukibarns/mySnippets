@@ -19,6 +19,18 @@ snips = {
 	s({ trig = "vault_dir", name = "VAULT_DIR", desc = "Vault Directory" }, fmt("{}", { t("$VAULT_DIR") }), opts2),
 	s({ trig = "code", name = "Code text", desc = "Code text" }, fmt([[`{}`{}]], { i(1), i(0) }), opts2),
 	s(
+		{ trig = "block", name = "Code block", desc = "Code block" },
+		fmt(
+			[[
+		```{}
+		{}
+		```
+		]],
+			{ i(1), i(0) }
+		),
+		opts
+	),
+	s(
 		{ trig = "figure", name = "Markdown figure with caption", desc = "Add an image with caption" },
 		fmt(
 			[[
