@@ -5,7 +5,7 @@ local pos = require("mySnippets.position")
 local tex = require("mySnippets.markdown")
 
 local opts = { condition = conds_expand.line_begin, show_condition = pos.line_begin, hidden = false }
-local opts2 = { condition = tex.in_text, show_condition = tex.in_text, hidden = true }
+local opts2 = { condition = tex.in_text, show_condition = tex.in_text, hidden = false }
 
 snips = {
 	s(

@@ -2,7 +2,7 @@ local autosnips = {}
 local snips = {}
 local tex = require("mySnippets.markdown")
 
-local opts = { condition = tex.in_math }
+local opts = { condition = tex.in_math, show_condition = tex.in_math }
 local opts_show = { condition = tex.in_math, show_condition = tex.in_math }
 
 local function symbol_snippet(context, cmd)

@@ -67,7 +67,7 @@ autosnips = {
 			name = "brackets",
 			desc = "bracket delimiter",
 			wordTrig = false,
-			hidden = false,
+			hidden = true,
 			condition = tex.in_math,
 		},
 		fmta(
@@ -83,7 +83,7 @@ autosnips = {
 			name = "braces",
 			desc = "brace delimiter",
 			wordTrig = false,
-			hidden = false,
+			hidden = true,
 			condition = tex.in_math,
 		},
 		fmta(
@@ -101,6 +101,7 @@ autosnips = {
 			wordTrig = true,
 			hidden = false,
 			condition = tex.in_math,
+			show_condition = tex.in_math,
 		},
 		fmta(
 			[[
@@ -117,6 +118,7 @@ autosnips = {
 			wordTrig = true,
 			hidden = false,
 			condition = tex.in_math,
+			show_condition = tex.in_math,
 		},
 		fmta(
 			[[

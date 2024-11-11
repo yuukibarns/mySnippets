@@ -2,7 +2,7 @@ local autosnips = {}
 
 local tex = require("mySnippets.markdown")
 
-local opts = { condition = tex.in_math }
+local opts = { condition = tex.in_math, show_condition = tex.in_math }
 
 local function operator_snippet(trig)
 	return s({ trig = trig, name = trig, hidden = false }, t([[\]] .. trig), opts)
