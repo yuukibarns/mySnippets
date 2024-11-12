@@ -223,7 +223,7 @@ local symbol_specs_wordtrig_true = {
 	amper = { context = { name = "&" }, cmd = [[&]] },
 	pound = { context = { name = "#" }, cmd = [[\#]] },
 	pip = { context = { name = "|" }, cmd = [[|]] },
-	eql = { context = { name = "=" }, cmd = [[=]] },
+	els = { context = { name = "=" }, cmd = [[=]] },
 	["and"] = { context = { name = "+" }, cmd = [[+]] },
 	les = { context = { name = "-" }, cmd = [[-]] },
 	-- spaces
