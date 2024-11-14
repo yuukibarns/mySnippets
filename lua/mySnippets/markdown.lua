@@ -12,6 +12,14 @@ local MATH_NODES = {
 ---Check if cursor is in treesitter node of 'math'
 ---@return boolean
 local function in_math()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local row, col = cursor[1], cursor[2]
+	if col > 1 then
+		local dollars_around_cursor = vim.api.nvim_buf_get_text(0, row - 1, col - 2, row - 1, col + 1, {})
+		if string.sub(dollars_around_cursor[1], 1, 1) == "$" and string.sub(dollars_around_cursor[1], 3, 3) == "$" then
+			return true
+		end
+	end
 	local node = vim.treesitter.get_node({ ignore_injections = false })
 	while node do
 		if node:type() == "text_mode" then
