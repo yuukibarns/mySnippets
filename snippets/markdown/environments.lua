@@ -1,8 +1,6 @@
-local snips, autosnips = {}, {}
+local snips = {}
 
-local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("mySnippets.markdown")
-local pos = require("mySnippets.position")
 
 -- Generating function for LaTeX environments like matrix and cases
 local function generate_env(rows, cols, default_cols)
@@ -43,7 +41,7 @@ snips = {
 			name = "[bBpvVa]matrix",
 			desc = "matrices",
 			regTrig = true,
-			hidden = true,
+			hidden = false,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -78,7 +76,7 @@ snips = {
 		)
 	),
 	s(
-		{ trig = "(%d+)cases", name = "cases(math)", desc = "cases(math)", regTrig = true, hidden = true },
+		{ trig = "(%d+)cases", name = "cases(math)", desc = "cases(math)", regTrig = true, hidden = false },
 		fmta(
 			[[
 			\begin{cases}
@@ -94,37 +92,30 @@ snips = {
 	),
 	s(
 		{
-			trig = "equations",
-			name = "equations",
-			desc = "system of equations",
+			trig = "bbal",
+			name = "bbal",
+			desc = "brace aligned",
 			hidden = false,
 		},
 		fmta(
 			[[
-			$$
-			\left\lbrace
-			\begin{aligned}
+			\left\lbrace\begin{aligned}
 			<>
-			\end{aligned}
-			\right.
-			$$
+			\end{aligned}\right.
 			]],
 			{ i(0) }
 		),
 		{
-			condition = conds_expand.line_begin,
-			show_condition = pos.line_begin,
+			condition = tex.in_math,
+			show_condition = tex.in_math,
 		}
 	),
-}
-
-autosnips = {
 	s(
 		{
 			trig = "bal",
 			name = "aligned",
 			desc = "align math",
-			hidden = true,
+			hidden = false,
 		},
 		fmta(
 			[[
@@ -135,10 +126,10 @@ autosnips = {
 			{ i(0) }
 		),
 		{
-			condition = conds_expand.line_begin * tex.in_math,
-			show_condition = pos.line_begin * tex.in_math,
+			condition = tex.in_math,
+			show_condition = tex.in_math,
 		}
 	),
 }
 
-return snips, autosnips
+return snips, nil
