@@ -175,6 +175,7 @@ local symbol_specs_wordtrig_true = {
 	sqcup = { context = { name = "⊔" }, cmd = [[\sqcup]] },
 	dagger = { context = { name = "†" }, cmd = [[\dagger]] },
 	bot = { context = { name = "⊥" }, cmd = [[\bot]] },
+	pm = { context = { name = "±" }, cmd = [[\pm]] },
 	wp = { context = { name = "℘" }, cmd = [[\wp]] },
 	hbar = { context = { name = "ℏ" }, cmd = [[\hbar]] },
 	ell = { context = { name = "ℓ" }, cmd = [[\ell]] },
