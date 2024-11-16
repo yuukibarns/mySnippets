@@ -91,6 +91,21 @@ snips = {
 		}
 	),
 	s(
+		{ trig = "cases", name = "cases(math)", desc = "cases(math)", hidden = false },
+		fmta(
+			[[
+			\begin{cases}
+			<>
+			\end{cases}
+			]],
+			{ i(0) }
+		),
+		{
+			condition = tex.in_math,
+			show_condition = tex.in_math,
+		}
+	),
+	s(
 		{
 			trig = "bbal",
 			name = "bbal",
