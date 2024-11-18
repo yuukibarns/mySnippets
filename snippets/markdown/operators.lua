@@ -36,6 +36,7 @@ local operator_specs = {
 	"bigoplus",
 	"bigwedge",
 	"bigvee",
+	"bigodot",
 	"int",
 	"arcsin",
 	"sin",

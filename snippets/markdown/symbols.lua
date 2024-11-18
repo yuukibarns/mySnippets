@@ -165,6 +165,7 @@ local symbol_specs_wordtrig_true = {
 	circ = { context = { name = "o" }, cmd = [[\circ]] },
 	wedge = { context = { name = "w" }, cmd = [[\wedge]] },
 	vee = { context = { name = "v" }, cmd = [[\vee]] },
+	odot = { context = { name = "v" }, cmd = [[\odot]] },
 	nabla = { context = { name = "∇" }, cmd = [[\nabla]] },
 	subset = { context = { name = "⊂" }, cmd = [[\subset]] },
 	supset = { context = { name = "⊃" }, cmd = [[\supset]] },
@@ -193,6 +194,7 @@ local symbol_specs_wordtrig_true = {
 	cong = { context = { name = "≅" }, cmd = [[\cong]] },
 	equiv = { context = { name = "≡" }, cmd = [[\equiv]] },
 	sim = { context = { name = "~" }, cmd = [[\sim]] },
+	simeq = { context = { name = "~" }, cmd = [[\simeq]] },
 	-- arrows
 	uparrow = { context = { name = "↑" }, cmd = [[\uparrow]] },
 	downarrow = { context = { name = "↓" }, cmd = [[\downarrow]] },
