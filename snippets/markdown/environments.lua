@@ -37,11 +37,11 @@ end
 snips = {
 	s(
 		{
-			trig = "([bBpvVa])mat(%d+)x(%d+)",
+			trig = "([bBpvVa]?)mat(%d+)x(%d+)",
 			name = "[bBpvVa]matrix",
 			desc = "matrices",
 			regTrig = true,
-			hidden = false,
+			hidden = true,
 			condition = tex.in_math,
 			show_condition = tex.in_math,
 		},
@@ -56,6 +56,9 @@ snips = {
 					if snip.captures[1] == "a" then
 						return "array"
 					end
+					if snip.captures[1] == "" then
+						return "pmatrix"
+					end
 					return snip.captures[1] .. "matrix"
 				end),
 				f(function(_, snip)
@@ -69,6 +72,9 @@ snips = {
 				f(function(_, snip)
 					if snip.captures[1] == "a" then
 						return "array"
+					end
+					if snip.captures[1] == "" then
+						return "pmatrix"
 					end
 					return snip.captures[1] .. "matrix"
 				end),
