@@ -32,7 +32,7 @@ autosnips = {
 			condition = tex.in_math,
 			hidden = true,
 		},
-		fmta([[\left<><>\right<><>]], {
+		fmta([[\left<> <> \right<><>]], {
 			f(function(_, snip)
 					local cap = snip.captures[1] or "p"
 					return brackets[cap][1]
