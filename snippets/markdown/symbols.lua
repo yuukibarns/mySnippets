@@ -92,7 +92,7 @@ local single_command_math_specs = {
 	sqrt = {
 		context = { name = "sqrt", desc = "sqrt" },
 		cmd = [[\sqrt]],
-		ext = { choice = true },
+		-- ext = { choice = true },
 	},
 	hat = {
 		context = { name = "hat", desc = "wide hat" },
@@ -202,6 +202,8 @@ local symbol_specs_wordtrig_true = {
 	searrow = { context = { name = "↘" }, cmd = [[\searrow]] },
 	hookrightarrow = { context = { name = "↪" }, cmd = [[\hookrightarrow]] },
 	iff = { context = { name = "⟺" }, cmd = [[\iff]] },
+	implies = { context = { name = "⇒" }, cmd = [[\implies]] },
+	impliedby = { context = { name = "⇐" }, cmd = [[\impliedby]] },
 	Rightarrow = { context = { name = "⇒" }, cmd = [[\Rightarrow]] },
 	Leftarrow = { context = { name = "⇐" }, cmd = [[\Leftarrow]] },
 	to = { context = { name = "→" }, cmd = [[\to]] },
