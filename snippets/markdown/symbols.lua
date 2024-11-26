@@ -298,7 +298,7 @@ local symbol_snippets_manual = {}
 
 for k, v in pairs(single_command_math_specs) do
 	table.insert(
-		symbol_snippets,
+		symbol_snippets_manual,
 		single_command_snippet(vim.tbl_deep_extend("keep", { trig = k }, v.context), v.cmd, v.ext or {})
 	)
 end
