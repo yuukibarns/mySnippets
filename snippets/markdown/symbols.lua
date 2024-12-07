@@ -158,6 +158,7 @@ local symbol_specs_wordtrig_true = {
 	QQ = { context = { name = "ℚ" }, cmd = [[\mathbb{Q}]] },
 	RR = { context = { name = "ℝ" }, cmd = [[\mathbb{R}]] },
 	ZZ = { context = { name = "ℤ" }, cmd = [[\mathbb{Z}]] },
+	emptyset = { context = { name = "Ø" }, cmd = [[\emptyset]] },
 	-- operators
 	times = { context = { name = "×" }, cmd = [[\times]] },
 	oplus = { context = { name = "⊕" }, cmd = [[\oplus]] },
@@ -250,8 +251,6 @@ local symbol_specs = {
 	[";."] = { context = { name = "·" }, cmd = [[\cdot]] },
 	[";<"] = { context = { name = "⟨" }, cmd = [[\langle]] },
 	[";>"] = { context = { name = "⟩" }, cmd = [[\rangle]] },
-	-- sets
-	[";0"] = { context = { name = "Ø" }, cmd = [[\emptyset]] },
 	-- greek alphabet
 	[";a"] = { context = { name = "alpha" }, cmd = [[\alpha]] },
 	[";b"] = { context = { name = "beta" }, cmd = [[\beta]] },
