@@ -151,6 +151,26 @@ snips = {
 			show_condition = tex.in_math,
 		}
 	),
+	s(
+		{
+			trig = "matrix",
+			name = "matrix",
+			desc = "matrix",
+			hidden = false,
+		},
+		fmta(
+			[[
+			\begin{pmatrix}
+			<>
+			\end{pmatrix}
+			]],
+			{ i(0) }
+		),
+		{
+			condition = tex.in_math,
+			show_condition = tex.in_math,
+		}
+	),
 }
 
 return snips, nil
