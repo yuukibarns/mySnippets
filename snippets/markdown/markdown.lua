@@ -42,6 +42,18 @@ snips = {
 		),
 		opts
 	),
+	s(
+		{ trig = "align", name = "Alignment", desc = "Alignment" },
+		fmt(
+			[[
+			<p align="{}">
+			{}
+			</p>
+			]],
+			{ i(1, "right"), i(0) }
+		),
+		opts
+	),
 }
 
 return snips, nil
