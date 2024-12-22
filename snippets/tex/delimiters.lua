@@ -5,11 +5,13 @@ local tex = require("mySnippets.latex")
 local brackets = {
 	a = { "\\langle ", "\\rangle" },
 	b = { "\\lbrack ", "\\rbrack" },
-	c = { "\\{", "\\}" },
-	e = { "\\lceil ", "\\rceil" },
+	B = { "\\{", "\\}" },
+	c = { "\\lceil ", "\\rceil" },
+	f = { "\\lfloor ", "\\rfloor" },
 	m = { "|", "|" },
 	n = { "\\|", "\\|" },
 	p = { "(", ")" },
+	v = { ".", "|" },
 }
 
 local function get_visual(_, parent)
@@ -23,7 +25,7 @@ end
 autosnips = {
 	s(
 		{
-			trig = "([l.])([r.])([abcemnp])",
+			trig = "([l.])([r.])([abBcfmnpv])",
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,

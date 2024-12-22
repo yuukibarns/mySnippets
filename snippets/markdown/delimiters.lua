@@ -5,8 +5,9 @@ local tex = require("mySnippets.markdown")
 local brackets = {
 	a = { "\\langle ", "\\rangle" },
 	b = { "\\lbrack ", "\\rbrack" },
-	c = { "\\{", "\\}" },
-	e = { "\\lceil ", "\\rceil" },
+	B = { "\\{", "\\}" },
+	c = { "\\lceil ", "\\rceil" },
+	f = { "\\lfloor ", "\\rfloor" },
 	m = { "|", "|" },
 	n = { "\\|", "\\|" },
 	p = { "(", ")" },
@@ -24,7 +25,7 @@ end
 autosnips = {
 	s(
 		{
-			trig = "lr([abcemnpv])",
+			trig = "lr([abBcfmnpv])",
 			name = "left right",
 			desc = "left right delimiters",
 			regTrig = true,
