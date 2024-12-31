@@ -44,9 +44,9 @@ snips = {
 		{ trig = "align", name = "Alignment", desc = "Aligned text" },
 		fmt(
 			[[
-			<p align="{}">
+			<div align="{}">
 			{}
-			</p>
+			</div>
 			]],
 			{ i(1, "right"), i(0) }
 		),
