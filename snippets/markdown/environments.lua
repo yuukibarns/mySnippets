@@ -24,6 +24,7 @@ local generate_matrix = function(_, snip)
 	local nodes = generate_env(tonumber(snip.captures[2]), tonumber(snip.captures[3]))
 	-- fix last node.
 	table.remove(nodes, #nodes)
+	table.insert(nodes, t("\\\\"))
 	return sn(nil, nodes)
 end
 
@@ -31,6 +32,7 @@ local generate_cases = function(_, snip)
 	local nodes = generate_env(tonumber(snip.captures[1]), 2)
 	-- fix last node.
 	table.remove(nodes, #nodes)
+	table.insert(nodes, t("\\\\"))
 	return sn(nil, nodes)
 end
 
