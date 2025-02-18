@@ -10,32 +10,32 @@ local opts = {
 }
 
 autosnips = {
-	s(
-		{ trig = "bfr", name = "Beamer Frame Environment" },
-		fmta(
-			[[
-			\begin{frame}
-				\frametitle{<>}
-				<>
-			\end{frame}
-			]],
-			{ i(1, "frame title"), i(0) }
-		),
-		opts
-	),
-
-	s(
-		{ trig = "bbl", name = "Beamer Block Environment" },
-		fmta(
-			[[
-			\begin{block}{<>}
-				<>
-			\\end{block}
-			]],
-			{ i(1), i(0) }
-		),
-		opts
-	),
+	-- s(
+	-- 	{ trig = "bfr", name = "Beamer Frame Environment" },
+	-- 	fmta(
+	-- 		[[
+	-- 		\begin{frame}
+	-- 			\frametitle{<>}
+	-- 			<>
+	-- 		\end{frame}
+	-- 		]],
+	-- 		{ i(1, "frame title"), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
+	--
+	-- s(
+	-- 	{ trig = "bbl", name = "Beamer Block Environment" },
+	-- 	fmta(
+	-- 		[[
+	-- 		\begin{block}{<>}
+	-- 			<>
+	-- 		\\end{block}
+	-- 		]],
+	-- 		{ i(1), i(0) }
+	-- 	),
+	-- 	opts
+	-- ),
 }
 
 return nil, autosnips

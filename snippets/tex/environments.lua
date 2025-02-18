@@ -7,7 +7,7 @@ local pos = require("mySnippets.position")
 local opts = {
 	condition = conds_expand.line_begin * tex.in_text,
 	show_condition = pos.line_begin * tex.in_text,
-	hidden = true,
+	hidden = false,
 }
 
 -- Generating function for LaTeX environments like matrix and cases
@@ -102,6 +102,23 @@ local function labeled_env_snippet(trig, env)
 	)
 end
 
+autosnips = {
+	s(
+		{
+			trig = "item",
+			hidden = false,
+			condition = conds_expand.line_begin * tex.in_bullets,
+			show_condition = pos.line_begin * tex.in_bullets,
+		},
+		fmta(
+			[[
+			\item
+			]],
+			{ i(0) }
+		)
+	),
+}
+
 snips = {
 	s(
 		{
@@ -143,13 +160,10 @@ snips = {
 			}
 		)
 	),
-}
-
-autosnips = {
 
 	s(
 		{
-			trig = "beg",
+			trig = "begin",
 			name = "begin/end",
 			desc = "begin/end environment (generic)",
 			hidden = true,
@@ -167,7 +181,7 @@ autosnips = {
 	),
 	s(
 		{
-			trig = "fig",
+			trig = "figure",
 			name = "figure/end",
 			desc = "figure/end environment (generic)",
 			hidden = true,
@@ -244,24 +258,10 @@ autosnips = {
 	),
 	s(
 		{
-			trig = "--",
-			hidden = true,
-			condition = conds_expand.line_begin * tex.in_bullets,
-			show_condition = pos.line_begin * tex.in_bullets,
-		},
-		fmta(
-			[[
-			\item <>
-			]],
-			{ i(0) }
-		)
-	),
-	s(
-		{
 			trig = "bal",
 			name = "align(|*|ed)",
 			desc = "align math",
-			hidden = true,
+			hidden = false,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -279,7 +279,7 @@ autosnips = {
 			trig = "beq",
 			name = "begin labeled_equation",
 			desc = "labeled_equation",
-			hidden = true,
+			hidden = false,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -294,10 +294,10 @@ autosnips = {
 	),
 	s(
 		{
-			trig = "bleq",
+			trig = "lbeq",
 			name = "begin labeled_equation",
 			desc = "labeled_equation",
-			hidden = true,
+			hidden = false,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -314,9 +314,6 @@ autosnips = {
 
 local env_specs = {
 	proof = "proof",
-}
-
-local labeled_env_specs = {
 	thm = "theorem",
 	lem = "lemma",
 	def = "definition",
@@ -329,7 +326,6 @@ local labeled_env_specs = {
 	prob = "problem",
 }
 
-env_specs = vim.tbl_extend("keep", env_specs, labeled_env_specs)
 
 local env_snippets = {}
 
@@ -337,18 +333,14 @@ for k, v in pairs(env_specs) do
 	table.insert(env_snippets, env_snippet(k, v))
 end
 
-for k, v in pairs(labeled_env_specs) do
-	table.insert(env_snippets, env_snippet(k, v))
-end
-
-for k, v in pairs(labeled_env_specs) do
+for k, v in pairs(env_specs) do
 	table.insert(env_snippets, named_env_snippet(k, v))
 end
 
-for k, v in pairs(labeled_env_specs) do
+for k, v in pairs(env_specs) do
 	table.insert(env_snippets, labeled_env_snippet(k, v))
 end
 
-vim.list_extend(autosnips, env_snippets)
+vim.list_extend(snips, env_snippets)
 
 return snips, autosnips
