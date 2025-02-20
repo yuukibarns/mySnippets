@@ -110,12 +110,7 @@ autosnips = {
 			condition = conds_expand.line_begin * tex.in_bullets,
 			show_condition = pos.line_begin * tex.in_bullets,
 		},
-		fmta(
-			[[
-			\item
-			]],
-			{ i(0) }
-		)
+		t([[\item]])
 	),
 }
 
@@ -166,7 +161,7 @@ snips = {
 			trig = "begin",
 			name = "begin/end",
 			desc = "begin/end environment (generic)",
-			hidden = true,
+			hidden = false,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -184,7 +179,7 @@ snips = {
 			trig = "figure",
 			name = "figure/end",
 			desc = "figure/end environment (generic)",
-			hidden = true,
+			hidden = false,
 			condition = conds_expand.line_begin,
 			show_condition = pos.line_begin,
 		},
@@ -200,18 +195,6 @@ snips = {
 			]],
 			{ i(1), i(0), l(l._1:gsub("[^%w]+", "_"):gsub("_$", ""):lower(), 0) }
 		)
-	),
-	s(
-		{ trig = "lproof", name = "Titled Proof", desc = "Create a titled proof environment." },
-		fmta(
-			[[
-			\begin{proof}[Proof of <>]
-				<>
-			\end{proof}
-			]],
-			{ i(1), i(0) }
-		),
-		opts
 	),
 	s(
 		{ trig = "(%d+)cases", name = "cases(math)", desc = "cases(math)", regTrig = true },
@@ -259,7 +242,7 @@ snips = {
 	s(
 		{
 			trig = "bal",
-			name = "align(|*|ed)",
+			name = "align",
 			desc = "align math",
 			hidden = false,
 			condition = conds_expand.line_begin,
@@ -267,11 +250,29 @@ snips = {
 		},
 		fmta(
 			[[
-			\begin{align<>}
+			\begin{align}
 				<>
-			\end{align<>}
+			\end{align}
 			]],
-			{ c(1, { t("*"), t(""), t("ed") }), i(0), rep(1) }
+			{ i(0) }
+		)
+	),
+	s(
+		{
+			trig = "bbal",
+			name = "align*",
+			desc = "align math",
+			hidden = false,
+			condition = conds_expand.line_begin,
+			show_condition = pos.line_begin,
+		},
+		fmta(
+			[[
+			\begin{align*}
+				<>
+			\end{align*}
+			]],
+			{ i(0) }
 		)
 	),
 	s(

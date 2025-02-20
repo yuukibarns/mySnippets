@@ -63,4 +63,4 @@ for k, v in pairs(sec_specs) do
 	table.insert(snips, labeled_sec_snippet(k, v))
 end
 
-return nil, snips
+return snips, nil
