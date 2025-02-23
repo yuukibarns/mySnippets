@@ -77,6 +77,10 @@ local single_command_math_specs = {
 		context = { name = "mathfrak", desc = "mathfrak text" },
 		cmd = [[\mathfrak]],
 	},
+	mathbf = {
+		context = { name = "mathbf", desc = "mathbf text" },
+		cmd = [[\mathbf]],
+	},
 	bm = {
 		context = { name = "bm", desc = "bold math text" },
 		cmd = [[\bm]],
