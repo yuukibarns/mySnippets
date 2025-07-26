@@ -122,6 +122,10 @@ local single_command_math_specs = {
         context = { name = "substack", desc = "substack for sums/products" },
         cmd = [[\substack]],
     },
+    underbrace = {
+        context = { name = "underbrace", desc = "underbrace" },
+        cmd = [[\underbrace]],
+    },
     xrightarrow = {
         context = { name = "xrightarrow", desc = "xrightarrow" },
         cmd = [[\xrightarrow]],
@@ -163,6 +167,7 @@ local symbol_specs_wordtrig_true = {
     RR = { context = { name = "ℝ" }, cmd = [[\mathbb{R}]] },
     ZZ = { context = { name = "ℤ" }, cmd = [[\mathbb{Z}]] },
     emptyset = { context = { name = "Ø" }, cmd = [[\emptyset]] },
+    square = { context = { name = "□" }, cmd = [[\square]] },
     -- operators
     times = { context = { name = "×" }, cmd = [[\times]] },
     oplus = { context = { name = "⊕" }, cmd = [[\oplus]] },
@@ -171,7 +176,6 @@ local symbol_specs_wordtrig_true = {
     wedge = { context = { name = "w" }, cmd = [[\wedge]] },
     vee = { context = { name = "v" }, cmd = [[\vee]] },
     odot = { context = { name = "v" }, cmd = [[\odot]] },
-    nabla = { context = { name = "∇" }, cmd = [[\nabla]] },
     subset = { context = { name = "⊂" }, cmd = [[\subset]] },
     supset = { context = { name = "⊃" }, cmd = [[\supset]] },
     setminus = { context = { name = "⧵" }, cmd = [[\setminus]] },
@@ -189,8 +193,6 @@ local symbol_specs_wordtrig_true = {
     ast = { context = { name = "∗" }, cmd = [[\ast]] },
     mid = { context = { name = "∗" }, cmd = [[\mid]] },
     nmid = { context = { name = "!|" }, cmd = [[\nmid]] },
-    partial = { context = { name = "∂" }, cmd = [[\partial]] },
-    infty = { context = { name = "∞" }, cmd = [[\infty]] },
     -- equality
     leq = { context = { name = "≤" }, cmd = [[\leq]] },
     geq = { context = { name = "≥" }, cmd = [[\geq]] },
@@ -220,23 +222,24 @@ local symbol_specs_wordtrig_true = {
     mapsto = { context = { name = "↦" }, cmd = [[\mapsto]] },
     longmapsto = { context = { name = "↦" }, cmd = [[\longmapsto]] },
     -- numbers
-    one = { context = { name = "1" }, cmd = [[1]] },
-    two = { context = { name = "2" }, cmd = [[2]] },
-    three = { context = { name = "3" }, cmd = [[3]] },
+    oo = { context = { name = "∞" }, cmd = [[\infty]] },
+    ro = { context = { name = "0" }, cmd = [[0]] },
+    oe = { context = { name = "1" }, cmd = [[1]] },
+    wo = { context = { name = "2" }, cmd = [[2]] },
+    tee = { context = { name = "3" }, cmd = [[3]] },
     four = { context = { name = "4" }, cmd = [[4]] },
     five = { context = { name = "5" }, cmd = [[5]] },
     six = { context = { name = "6" }, cmd = [[6]] },
     seven = { context = { name = "7" }, cmd = [[7]] },
     eight = { context = { name = "8" }, cmd = [[8]] },
     nine = { context = { name = "9" }, cmd = [[9]] },
-    zero = { context = { name = "0" }, cmd = [[0]] },
     -- basic symbols
     amp = { context = { name = "&" }, cmd = [[&]] },
     pound = { context = { name = "#" }, cmd = [[\#]] },
     pip = { context = { name = "|" }, cmd = [[|]] },
-    eql = { context = { name = "=" }, cmd = [[=]] },
-    ["and"] = { context = { name = "+" }, cmd = [[+]] },
-    les = { context = { name = "-" }, cmd = [[-]] },
+    es = { context = { name = "=" }, cmd = [[=]] },
+    ps = { context = { name = "+" }, cmd = [[+]] },
+    ms = { context = { name = "-" }, cmd = [[-]] },
     -- spaces
     spa = { context = { name = " " }, cmd = [[\]] },
     quad = { context = { name = "  " }, cmd = [[\quad]] },
@@ -295,6 +298,8 @@ local symbol_specs = {
     --var symbols
     [";vq"] = { context = { name = "vartheta" }, cmd = [[\vartheta]] },
     [";vf"] = { context = { name = "varphi" }, cmd = [[\varphi]] },
+    [";vp"] = { context = { name = "∂" }, cmd = [[\partial]] },
+    [";vn"] = { context = { name = "∇" }, cmd = [[\nabla]] },
 }
 
 local symbol_snippets = {}

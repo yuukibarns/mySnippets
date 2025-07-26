@@ -4,7 +4,7 @@ local tex = require("mySnippets.latex")
 
 local brackets = {
     a = { "\\langle ", "\\rangle" },
-    b = { "\\lbrack ", "\\rbrack" },
+    b = { "[ ", "]" },
     B = { "\\{", "\\}" },
     c = { "\\lceil ", "\\rceil" },
     f = { "\\lfloor ", "\\rfloor" },
@@ -74,7 +74,7 @@ autosnips = {
         },
         fmta(
             [[
-            \lbrack <> \rbrack<>
+            [<>]<>
             ]],
             { i(1), i(0) }
         )

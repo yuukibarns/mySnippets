@@ -7,5 +7,6 @@ local opts = { condition = tex.in_text, show_condition = tex.in_text }
 snips = {
     s({ trig = "bold", name = "bold", desc = "Insert bold text." }, { t("\\textbf{"), i(1), t("}") }, opts),
     s({ trig = "italic", name = "italic", desc = "Insert italic text." }, { t("\\textit{"), i(1), t("}") }, opts),
+    s({ trig = "phantom", name = "phantom", desc = "Phantom Text." }, { t("\\phantom{"), i(1), t("}") }),
 }
 return snips, nil

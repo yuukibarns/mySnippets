@@ -53,7 +53,7 @@ local function env_snippet(trig, env)
         fmta(
             [[
             \begin{<>}
-                <>
+              <>
             \end{<>}
             ]],
             { t(env), i(0), t(env) }
@@ -73,7 +73,7 @@ local function named_env_snippet(trig, env)
         fmta(
             [[
             \begin{<>}[<>]
-                <>
+              <>
             \end{<>}
             ]],
             { t(env), i(1), i(0), t(env) }
@@ -93,7 +93,7 @@ local function labeled_env_snippet(trig, env)
         fmta(
             [[
             \begin{<>}[<>]\label{<>:<>}
-                <>
+              <>
             \end{<>}
             ]],
             { t(env), i(0), t(trig), l(l._1:gsub("[^%w]+", "_"):gsub("_$", ""):lower(), 1), i(2), t(env) }
@@ -128,7 +128,7 @@ snips = {
         fmta(
             [[
             \begin{<>}<>
-                <>
+            <>
             \end{<>}
             ]],
             {
@@ -168,7 +168,7 @@ snips = {
         fmta(
             [[
             \begin{<>}
-                <>
+              <>
             \end{<>}
             ]],
             { i(1), i(0), rep(1) }
@@ -185,13 +185,13 @@ snips = {
         },
         fmta(
             [[
-                \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.8\textwidth]{./<>}
-                \caption{<>}
-                \label{fig:<>}
-                \end{figure}
-                \FloatBarrier
+            \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.8\textwidth]{./<>}
+            \caption{<>}
+            \label{fig:<>}
+            \end{figure}
+            \FloatBarrier
             ]],
             { i(1), i(0), l(l._1:gsub("[^%w]+", "_"):gsub("_$", ""):lower(), 0) }
         )
@@ -201,7 +201,7 @@ snips = {
         fmta(
             [[
             \begin{cases}
-                <>
+              <>
             \end{cases}
             ]],
             { d(1, generate_cases) }
@@ -217,7 +217,7 @@ snips = {
         fmta(
             [[
             \begin{itemize}
-                <>
+              <>
             \end{itemize}
             ]],
             { i(0) }
@@ -229,7 +229,7 @@ snips = {
         fmta(
             [[
             \begin{enumerate}[<>]
-                <>
+              <>
             \end{enumerate}
             ]],
             {
@@ -251,7 +251,7 @@ snips = {
         fmta(
             [[
             \begin{align}
-                <>
+              <> \\
             \end{align}
             ]],
             { i(0) }
@@ -269,7 +269,7 @@ snips = {
         fmta(
             [[
             \begin{aligned}
-                <>
+              <> \\
             \end{aligned}
             ]],
             { i(0) }
@@ -277,7 +277,7 @@ snips = {
     ),
     s(
         {
-            trig = "bal*",
+            trig = "bals",
             name = "align*",
             desc = "align math",
             hidden = false,
@@ -287,7 +287,7 @@ snips = {
         fmta(
             [[
             \begin{align*}
-                <>
+              <> \\
             \end{align*}
             ]],
             { i(0) }
@@ -305,7 +305,7 @@ snips = {
         fmta(
             [[
             \begin{equation}
-                <>
+              <>
             \end{equation}      
             ]],
             { i(0) }
@@ -323,7 +323,7 @@ snips = {
         fmta(
             [[
             \begin{equation}\label{eq:<>}
-                <>
+              <>
             \end{equation}      
             ]],
             { i(1), i(0) }

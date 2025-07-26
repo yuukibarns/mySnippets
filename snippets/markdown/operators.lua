@@ -2,7 +2,8 @@ local autosnips = {}
 
 local tex = require("mySnippets.markdown")
 
-local opts = { condition = tex.in_math, show_condition = tex.in_math }
+local conds_expand = require("luasnip.extras.conditions.expand")
+local opts = { condition = tex.in_math * conds_expand.trigger_not_preceded_by("[%w_\\]"), show_condition = tex.in_math }
 
 local function operator_snippet(trig)
     return s({ trig = trig, name = trig, hidden = false }, t([[\]] .. trig), opts)
@@ -10,24 +11,30 @@ end
 
 autosnips = {
     s(
-        { trig = "over", name = "fraction", desc = "fraction (general)", hidden = false },
+        { trig = "//", name = "fraction", desc = "fraction (general)", hidden = true },
         fmta([[\frac{<>}{<>}<>]], { i(1), i(2), i(0) }),
         opts
     ),
     s(
-        { trig = "(%w)over", name = "over", desc = "auto fraction", hidden = true, regTrig = true },
+        { trig = "(%w)//", name = "over", desc = "auto fraction", hidden = true, regTrig = true },
         fmta([[\frac{<>}{<>}<>]], { f(function(_, snip)
             return snip.captures[1]
         end), i(1), i(0) }),
         opts
     ),
-    s({ trig = "binom", name = "binomial", desc = "binomial", hidden = false }, fmta([[\binom{<>}{<>}<>]], { i(1), i(2), i(0) }), opts),
+    s(
+        { trig = "dfrac", name = "display fraction", desc = "fraction (display mode)", hidden = false },
+        fmta([[\dfrac{<>}{<>}<>]], { i(1), i(2), i(0) }),
+        opts
+    ),
+    s({ trig = "binom", name = "binomial", desc = "binomial", hidden = false },
+        fmta([[\binom{<>}{<>}<>]], { i(1), i(2), i(0) }), opts),
 }
 
 local operator_specs = {
     "sum",
     "prod",
-    "cprod",
+    "coprod",
     "bigcap",
     "bigcup",
     "bigsqcap",
@@ -38,6 +45,11 @@ local operator_specs = {
     "bigvee",
     "bigodot",
     "int",
+    "iint",
+    "iiint",
+    "oint",
+    "oiint",
+    "oiiint",
     "arcsin",
     "sin",
     "arccos",
@@ -52,7 +64,6 @@ local operator_specs = {
     "det",
     "dim",
     "exp",
-    "hom",
     "inf",
     "sup",
     "ker",
@@ -62,6 +73,29 @@ local operator_specs = {
     "Re",
     "Im",
     "arg",
+    "gcd",
+    "Hom",
+    "End",
+    "ker",
+    "im",
+    "rank",
+    "tr",
+    "Spec",
+    "Re",
+    "Im",
+    "Res",
+    "sgn",
+    "argmax",
+    "argmin",
+    "Var",
+    "Cov",
+    "diam",
+    "Vol",
+    "grad",
+    "curl",
+    "div",
+    "ord",
+    "lcm",
 }
 
 for _, v in ipairs(operator_specs) do

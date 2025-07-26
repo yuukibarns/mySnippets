@@ -1,12 +1,11 @@
 local username = "yuukibarns"
+local comment = require("mySnippets.context")
 
 local function todo_snippet_nodes(alias)
     -- format them into the actual snippet
-    local date = os.date("%d-%m-%y")
-    local comment_node = fmt("{}: {} {}{}", {
-        t(alias), -- [name-of-comment]
-        i(1), -- {comment-text}
-        t("<" .. date .. ", " .. username .. ">"), -- [comment-mark]
+    local comment_node = fmt("{}{}: {}", {
+        t(alias),                                  -- [name-of-comment]
+        t("(" .. username .. ")"), -- [comment-mark]
         i(0),
     })
     return comment_node
@@ -23,7 +22,15 @@ local function todo_snippet(trig, alias)
     }
     local comment_node = todo_snippet_nodes(alias)
 
-    return s(context, comment_node, {})
+    return s(
+        context,
+        comment_node,
+        {
+            condition = comment.in_comments,
+            show_condition = comment.in_comments,
+            hidden = false,
+        }
+    )
 end
 
 local base_specs = {

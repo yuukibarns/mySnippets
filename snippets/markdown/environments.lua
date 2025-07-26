@@ -1,6 +1,7 @@
 local snips = {}
 
 local tex = require("mySnippets.markdown")
+local opts = { condition = tex.in_math, show_condition = tex.in_math }
 
 -- Generating function for LaTeX environments like matrix and cases
 local function generate_env(rows, cols, default_cols)
@@ -21,7 +22,7 @@ local function generate_env(rows, cols, default_cols)
 end
 
 local generate_matrix = function(_, snip)
-    local nodes = generate_env(tonumber(snip.captures[2]), tonumber(snip.captures[3]))
+    local nodes = snip.captures and generate_env(tonumber(snip.captures[2]), tonumber(snip.captures[3])) or generate_env(2, 2)
     -- fix last node.
     table.remove(nodes, #nodes)
     table.insert(nodes, t("\\\\"))
@@ -29,7 +30,7 @@ local generate_matrix = function(_, snip)
 end
 
 local generate_cases = function(_, snip)
-    local nodes = generate_env(tonumber(snip.captures[1]), 2)
+    local nodes = snip.captures and generate_env(tonumber(snip.captures[1]), 2) or generate_env(2, 2)
     -- fix last node.
     table.remove(nodes, #nodes)
     table.insert(nodes, t("\\\\"))
@@ -39,13 +40,12 @@ end
 snips = {
     s(
         {
-            trig = "([bBpvVa]?)mat(%d+)x(%d+)",
-            name = "[bBpvVa]matrix",
+            trig = "([bBpvVa]?)mat([1-9])x([1-9])",
+            name = "matrix",
             desc = "matrices",
+            docTrig = "matrix",
             regTrig = true,
-            hidden = true,
-            condition = tex.in_math,
-            show_condition = tex.in_math,
+            hidden = false,
         },
         fmta(
             [[
@@ -55,16 +55,20 @@ snips = {
             ]],
             {
                 f(function(_, snip)
-                    if snip.captures[1] == "a" then
-                        return "array"
-                    end
-                    if snip.captures[1] == "" then
+                    if snip.captures then
+                        if snip.captures[1] == "a" then
+                            return "array"
+                        end
+                        if snip.captures[1] == "" then
+                            return "pmatrix"
+                        end
+                        return snip.captures[1] .. "matrix"
+                    else
                         return "pmatrix"
                     end
-                    return snip.captures[1] .. "matrix"
                 end),
                 f(function(_, snip)
-                    if snip.captures[1] == "a" then
+                    if snip.captures and snip.captures[1] == "a" then
                         local out = string.rep("c", tonumber(snip.captures[3]) - 1)
                         return "{" .. out .. "c}"
                     end
@@ -72,19 +76,24 @@ snips = {
                 end),
                 d(1, generate_matrix),
                 f(function(_, snip)
-                    if snip.captures[1] == "a" then
-                        return "array"
-                    end
-                    if snip.captures[1] == "" then
+                    if snip.captures then
+                        if snip.captures[1] == "a" then
+                            return "array"
+                        end
+                        if snip.captures[1] == "" then
+                            return "pmatrix"
+                        end
+                        return snip.captures[1] .. "matrix"
+                    else
                         return "pmatrix"
                     end
-                    return snip.captures[1] .. "matrix"
                 end),
             }
-        )
+        ),
+        opts
     ),
     s(
-        { trig = "(%d+)cases", name = "cases(math)", desc = "cases(math)", regTrig = true, hidden = false },
+        { trig = "(%d+)cases", name = "some cases", docTrig = "some cases", desc = "cases(math)", regTrig = true, hidden = false },
         fmta(
             [[
             \begin{cases}
@@ -93,25 +102,19 @@ snips = {
             ]],
             { d(1, generate_cases) }
         ),
-        {
-            condition = tex.in_math,
-            show_condition = tex.in_math,
-        }
+        opts
     ),
     s(
         { trig = "cases", name = "cases(math)", desc = "cases(math)", hidden = false },
         fmta(
             [[
             \begin{cases}
-            <>
+              <> \\
             \end{cases}
             ]],
             { i(0) }
         ),
-        {
-            condition = tex.in_math,
-            show_condition = tex.in_math,
-        }
+        opts
     ),
     s(
         {
@@ -123,35 +126,12 @@ snips = {
         fmta(
             [[
             \begin{aligned}
-                <>
+              <> \\
             \end{aligned}
             ]],
             { i(0) }
         ),
-        {
-            condition = tex.in_math,
-            show_condition = tex.in_math,
-        }
-    ),
-    s(
-        {
-            trig = "matrix",
-            name = "matrix",
-            desc = "matrix",
-            hidden = false,
-        },
-        fmta(
-            [[
-            \begin{pmatrix}
-            <>
-            \end{pmatrix}
-            ]],
-            { i(0) }
-        ),
-        {
-            condition = tex.in_math,
-            show_condition = tex.in_math,
-        }
+        opts
     ),
 }
 

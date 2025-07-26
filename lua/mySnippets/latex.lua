@@ -19,10 +19,34 @@ local ALIGN_ENVS = {
     gather = true,
     flalign = true,
 }
+
 local BULLET_ENVS = {
     itemize = true,
     enumerate = true,
 }
+
+local MATH_STYLE = {
+    mathrm = true,
+    mathit = true,
+    mathbf = true,
+}
+
+---Check if cursor is in mathstyle commands
+---@return boolean
+local function in_mathstyle()
+    local node = vim.treesitter.get_node()
+    while node do
+        if node:type() == "generic_command" then
+            local command = node:field("command")
+
+            if command and command[1] and MATH_STYLE[get_node_text(command[1], 0):gsub("^\\", "")] then
+                return true
+            end
+        end
+        node = node:parent()
+    end
+    return false
+end
 
 ---Check if cursor is in treesitter node of 'math'
 ---@return boolean
@@ -31,6 +55,12 @@ local function in_math()
     while node do
         if node:type() == "text_mode" then
             return false
+        elseif node:type() == "generic_command" then
+            local command = node:field("command")
+
+            if command and command[1] and MATH_STYLE[get_node_text(command[1], 0):gsub("^\\", "")] then
+                return false
+            end
         elseif MATH_NODES[node:type()] then
             return true
         end
