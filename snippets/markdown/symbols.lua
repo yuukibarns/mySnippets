@@ -131,6 +131,10 @@ local single_command_math_specs = {
         context = { name = "mathring", desc = "mathring" },
         cmd = [[\mathring]],
     },
+    breve = {
+        context = { name = "breve", desc = "breve" },
+        cmd = [[\breve]],
+    },
     substack = {
         context = { name = "substack", desc = "substack for sums/products" },
         cmd = [[\substack]],
@@ -143,9 +147,17 @@ local single_command_math_specs = {
         context = { name = "xrightarrow", desc = "xrightarrow" },
         cmd = [[\xrightarrow]],
     },
+    xRightarrow = {
+        context = { name = "xRightarrow", desc = "xRightarrow" },
+        cmd = [[\xRightarrow]],
+    },
     xleftarrow = {
         context = { name = "xleftarrow", desc = "xleftarrow" },
         cmd = [[\xleftarrow]],
+    },
+    xLeftarrow = {
+        context = { name = "xLeftarrow", desc = "xLeftarrow" },
+        cmd = [[\xLeftarrow]],
     },
     tag = {
         context = { name = "tag", desc = "add tag" },
@@ -187,7 +199,10 @@ local symbol_specs_wordtrig_true = {
     oplus = { context = { name = "⊕" }, cmd = [[\oplus]] },
     otimes = { context = { name = "⊗" }, cmd = [[\otimes]] },
     circ = { context = { name = "o" }, cmd = [[\circ]] },
+    flat = { context = { name = "o" }, cmd = [[\flat]] },
+    sharp = { context = { name = "o" }, cmd = [[\sharp]] },
     wed = { context = { name = "w" }, cmd = [[\wedge]] },
+    kn = { context = { name = "w" }, cmd = [[\KN]] },
     vee = { context = { name = "v" }, cmd = [[\vee]] },
     odot = { context = { name = "v" }, cmd = [[\odot]] },
     subset = { context = { name = "⊂" }, cmd = [[\subset]] },
@@ -198,6 +213,7 @@ local symbol_specs_wordtrig_true = {
     sqcap = { context = { name = "⊓" }, cmd = [[\sqcap]] },
     sqcup = { context = { name = "⊔" }, cmd = [[\sqcup]] },
     dagger = { context = { name = "†" }, cmd = [[\dagger]] },
+    parallel = { context = { name = "†" }, cmd = [[\parallel]] },
     bot = { context = { name = "⊥" }, cmd = [[\bot]] },
     pm = { context = { name = "±" }, cmd = [[\pm]] },
     mp = { context = { name = "±" }, cmd = [[\mp]] },
@@ -238,6 +254,7 @@ local symbol_specs_wordtrig_true = {
     leftrightarrow = { context = { name = "↔" }, cmd = [[\leftrightarrow]] },
     longrightarrow = { context = { name = "⟶" }, cmd = [[\longrightarrow]] },
     rightrightarrows = { context = { name = "⇉" }, cmd = [[\rightrightarrows]] },
+    twoheadrightarrow = { context = { name = "⇉" }, cmd = [[\twoheadrightarrow]] },
     mapsto = { context = { name = "↦" }, cmd = [[\mapsto]] },
     longmapsto = { context = { name = "↦" }, cmd = [[\longmapsto]] },
     -- numbers
@@ -261,8 +278,8 @@ local symbol_specs_wordtrig_true = {
     es = { context = { name = "=" }, cmd = [[=]] },
     ps = { context = { name = "+" }, cmd = [[+]] },
     ms = { context = { name = "-" }, cmd = [[-]] },
-    smallfrown = { context = { name = "-" }, cmd = [[\smallfrown]] },
-    smallsmile = { context = { name = "-" }, cmd = [[\smallsmile]] },
+    frown = { context = { name = "-" }, cmd = [[\frown]] },
+    smile = { context = { name = "-" }, cmd = [[\smile]] },
     -- spaces
     spa = { context = { name = " " }, cmd = [[\]] },
     quad = { context = { name = "  " }, cmd = [[\quad]] },

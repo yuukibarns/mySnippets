@@ -69,6 +69,7 @@ snips = {
     s({ trig = "bo", name = "Bold text", desc = "Bold text" }, fmt([[**{}**{}]], { i(1), i(0) }), opts2),
     s({ trig = "io", name = "Italic text", desc = "Italic text" }, fmt([[*{}*{}]], { i(1), i(0) }), opts2),
     s({ trig = "bio", name = "Bold Italic text", desc = "Bold Italic text" }, fmt([[_**{}**_{}]], { i(1), i(0) }), opts2),
+    s({ trig = "mark", name = "Highlighted text", desc = "Highlighted text" }, fmt([[<mark>{}</mark>{}]], { i(1), i(0) }), opts2),
     s({ trig = "lo", name = "Link text", desc = "Link text" }, fmt("[{}]({})", { i(1), i(0) }), opts2),
     s({ trig = "uo", name = "URL", desc = "URL" }, fmt("<{}>{}", { i(1), i(0) }), opts2),
     s({ trig = "foo", name = "Footnote", desc = "Footnote" }, fmt("[^{}]{}", { i(1), i(0) }), opts2),

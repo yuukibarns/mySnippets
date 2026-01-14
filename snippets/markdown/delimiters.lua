@@ -8,7 +8,7 @@ local opts2 = { condition = tex.in_math, show_condition = tex.in_math }
 
 local brackets = {
     a = { "\\langle ", "\\rangle" },
-    b = { "\\lbrack ", "\\rbrack" },
+    b = { "[ ", "]" },
     B = { "\\{", "\\}" },
     c = { "\\lceil ", "\\rceil" },
     f = { "\\lfloor ", "\\rfloor" },
