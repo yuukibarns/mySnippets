@@ -2,21 +2,10 @@ local snips = {}
 
 local conds_expand = require("luasnip.extras.conditions.expand")
 local pos = require("mySnippets.position")
-local tex = require("mySnippets.markdown")
+local tex = require("mySnippets.tex")
 
 local opts = { condition = conds_expand.line_begin, show_condition = pos.line_begin }
 local opts2 = { condition = tex.in_text, show_condition = tex.in_text }
-
-if vim.bo.filetype == "python" then
-    local python = require("mySnippets.context")
-    opts = {
-        condition = conds_expand.line_begin * python.in_python_doc,
-        show_condition = pos.line_begin *
-            python.in_python_doc,
-        hidden = false
-    }
-    opts2 = { condition = tex.in_text * python.in_python_doc, show_condition = tex.in_text * python.in_python_doc, hidden = false }
-end
 
 -- Generating function for LaTeX environments like matrix and cases
 local function generate_env(rows, cols, default_cols)
@@ -65,7 +54,6 @@ local generate_table = function(_, snip)
 end
 
 snips = {
-    s({ trig = "vault_dir", name = "VAULT_DIR", desc = "Vault Directory" }, fmt("{}", { t("$VAULT_DIR") }), opts2),
     s({ trig = "bo", name = "Bold text", desc = "Bold text" }, fmt([[**{}**{}]], { i(1), i(0) }), opts2),
     s({ trig = "io", name = "Italic text", desc = "Italic text" }, fmt([[*{}*{}]], { i(1), i(0) }), opts2),
     s({ trig = "bio", name = "Bold Italic text", desc = "Bold Italic text" }, fmt([[_**{}**_{}]], { i(1), i(0) }), opts2),

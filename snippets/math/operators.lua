@@ -1,6 +1,6 @@
 local autosnips = {}
 
-local tex = require("mySnippets.markdown")
+local tex = require("mySnippets.tex")
 
 local conds_expand = require("luasnip.extras.conditions.expand")
 local opts = { condition = tex.in_math * conds_expand.trigger_not_preceded_by("[%w_\\]"), show_condition = tex.in_math }
@@ -20,11 +20,6 @@ autosnips = {
         fmta([[\frac{<>}{<>}<>]], { f(function(_, snip)
             return snip.captures[1]
         end), i(1), i(0) }),
-        opts
-    ),
-    s(
-        { trig = "dfrac", name = "display fraction", desc = "fraction (display mode)", hidden = false },
-        fmta([[\dfrac{<>}{<>}<>]], { i(1), i(2), i(0) }),
         opts
     ),
     s({ trig = "binom", name = "binomial", desc = "binomial", hidden = false },
@@ -78,6 +73,7 @@ local operator_specs = {
     "Im",
     "arg",
     "gcd",
+    "Pr",
     "Hom",
     "Tor",
     "Ext",

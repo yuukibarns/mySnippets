@@ -1,6 +1,6 @@
 local autosnips = {}
 local snips = {}
-local tex = require("mySnippets.markdown")
+local tex = require("mySnippets.tex")
 
 local conds_expand = require("luasnip.extras.conditions.expand")
 local opts = { condition = tex.in_math * conds_expand.trigger_not_preceded_by("[%w_\\]"), show_condition = tex.in_math }
@@ -279,6 +279,7 @@ local symbol_specs_wordtrig_true = {
     pip = { context = { name = "|" }, cmd = [[|]] },
     Pip = { context = { name = "|" }, cmd = [[\bigg|]] },
     PIP = { context = { name = "|" }, cmd = [[\Bigg|]] },
+    mip = { context = { name = "|" }, cmd = [[\;\middle|\;]] },
     es = { context = { name = "=" }, cmd = [[=]] },
     ps = { context = { name = "+" }, cmd = [[+]] },
     ms = { context = { name = "-" }, cmd = [[-]] },

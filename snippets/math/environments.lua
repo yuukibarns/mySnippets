@@ -1,6 +1,6 @@
 local snips = {}
 
-local tex = require("mySnippets.markdown")
+local tex = require("mySnippets.tex")
 local opts = { condition = tex.in_math, show_condition = tex.in_math }
 
 -- Generating function for LaTeX environments like matrix and cases
@@ -9,6 +9,7 @@ local function generate_env(rows, cols, default_cols)
     local nodes = {}
     local ins_indx = 1
     for j = 1, rows do
+        table.insert(nodes, t("    "))
         table.insert(nodes, r(ins_indx, tostring(j) .. "x1", i(1)))
         ins_indx = ins_indx + 1
         for k = 2, cols do

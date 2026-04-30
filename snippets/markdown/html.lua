@@ -2,7 +2,7 @@ local snips = {}
 
 local conds_expand = require("luasnip.extras.conditions.expand")
 local pos = require("mySnippets.position")
-local tex = require("mySnippets.markdown")
+local tex = require("mySnippets.tex")
 
 local opts = { condition = conds_expand.line_begin, show_condition = pos.line_begin, hidden = false }
 local opts2 = { condition = tex.in_text, show_condition = tex.in_text, hidden = false }
