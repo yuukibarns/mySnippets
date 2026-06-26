@@ -1,7 +1,7 @@
 local snips = {}
 
 -- local conds_expand = require("luasnip.extras.conditions.expand")
-local tex = require("mySnippets.tex")
+local tex = require("mySnippets.tex").conds
 
 local opts = { condition = tex.in_text, show_condition = tex.in_text }
 

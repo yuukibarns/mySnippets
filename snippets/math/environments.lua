@@ -1,6 +1,6 @@
 local snips = {}
 
-local tex = require("mySnippets.tex")
+local tex = require("mySnippets.tex").conds
 local opts = { condition = tex.in_math, show_condition = tex.in_math }
 
 -- Generating function for LaTeX environments like matrix and cases

@@ -1,10 +1,7 @@
-local autosnips = {}
-
-local tex = require("mySnippets.tex")
+local tex = require("mySnippets.tex").conds
 
 local conds_expand = require("luasnip.extras.conditions.expand")
 local opts = { condition = tex.in_math * conds_expand.trigger_not_preceded_by("[%w_\\]"), show_condition = tex.in_math }
-local opts2 = { condition = tex.in_math, show_condition = tex.in_math }
 
 local brackets = {
     a = { "\\langle ", "\\rangle" },
@@ -15,10 +12,10 @@ local brackets = {
     m = { "|", "|" },
     n = { "\\|", "\\|" },
     p = { "(", ")" },
-    g = { "\\lbrack", "\\rparen" },
-    h = { "\\lparen", "\\rbrack" },
+    g = { "\\[", "\\)" },
+    h = { "\\(", "\\]" },
     v = { ".", "|" },
-    s = { "\\lbrace", "." },
+    s = { "\\{", "." },
 }
 
 local function get_visual(_, parent)
@@ -55,98 +52,4 @@ local snips = {
     ),
 }
 
-autosnips = {
-    s(
-        {
-            trig = ";o",
-            name = "parentheses",
-            desc = "parenthese delimiter",
-            wordTrig = false,
-            hidden = true,
-        },
-        fmta(
-            [[
-            (<>)<>
-            ]],
-            { i(1), i(0) }
-        ),
-        opts2
-    ),
-    s(
-        {
-            trig = ";[",
-            name = "brackets",
-            desc = "bracket delimiter",
-            wordTrig = false,
-            hidden = true,
-        },
-        fmta(
-            [[
-            [<>]<>
-            ]],
-            { i(1), i(0) }
-        ),
-        opts2
-    ),
-    s(
-        {
-            trig = ";{",
-            name = "braces",
-            desc = "brace delimiter",
-            wordTrig = false,
-            hidden = true,
-        },
-        fmta(
-            [[
-            \{<>\}<>
-            ]],
-            { i(1), i(0) }
-        ),
-        opts2
-    ),
-    s(
-        {
-            trig = "{",
-            name = "tensor",
-            desc = "tensor",
-            wordTrig = false,
-            hidden = true,
-        },
-        t("{}"),
-        opts2
-    ),
-    s(
-        {
-            trig = "abs",
-            name = "norm",
-            desc = "norm delimiter",
-            wordTrig = true,
-            hidden = false,
-        },
-        fmta(
-            [[
-            |<>|<>
-            ]],
-            { i(1), i(0) }
-        ),
-        opts
-    ),
-    s(
-        {
-            trig = "norm",
-            name = "Norm",
-            desc = "Norm delimiter",
-            wordTrig = true,
-            hidden = false,
-        },
-        fmta(
-            [[
-            \|<>\|<>
-            ]],
-            { i(1), i(0) }
-        ),
-        opts
-    ),
-}
-
-return snips, autosnips
+return snips, nil

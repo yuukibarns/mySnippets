@@ -2,7 +2,7 @@ local snips = {}
 
 local conds_expand = require("luasnip.extras.conditions.expand")
 local pos = require("mySnippets.position")
-local tex = require("mySnippets.tex")
+local tex = require("mySnippets.tex").conds
 
 local opts = { condition = conds_expand.line_begin, show_condition = pos.line_begin }
 local opts2 = { condition = tex.in_text, show_condition = tex.in_text }
@@ -54,15 +54,8 @@ local generate_table = function(_, snip)
 end
 
 snips = {
-    s({ trig = "bo", name = "Bold text", desc = "Bold text" }, fmt([[**{}**{}]], { i(1), i(0) }), opts2),
-    s({ trig = "io", name = "Italic text", desc = "Italic text" }, fmt([[*{}*{}]], { i(1), i(0) }), opts2),
-    s({ trig = "bio", name = "Bold Italic text", desc = "Bold Italic text" }, fmt([[_**{}**_{}]], { i(1), i(0) }), opts2),
     s({ trig = "mark", name = "Highlighted text", desc = "Highlighted text" }, fmt([[<mark>{}</mark>{}]], { i(1), i(0) }), opts2),
-    s({ trig = "lo", name = "Link text", desc = "Link text" }, fmt("[{}]({})", { i(1), i(0) }), opts2),
-    s({ trig = "uo", name = "URL", desc = "URL" }, fmt("<{}>{}", { i(1), i(0) }), opts2),
     s({ trig = "foo", name = "Footnote", desc = "Footnote" }, fmt("[^{}]{}", { i(1), i(0) }), opts2),
-    s({ trig = "imo", name = "Image", desc = "Image" }, fmt("![{}]({})", { i(1), i(0) }), opts2),
-    s({ trig = "co", name = "Code text", desc = "Code text" }, fmt([[`{}`{}]], { i(1), i(0) }), opts2),
     s(
         { trig = "blo", name = "Code block", desc = "Code block" },
         fmt(

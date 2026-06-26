@@ -1,7 +1,7 @@
 local autosnips = {}
 
 local conds_expand = require("luasnip.extras.conditions.expand")
-local tex = require("mySnippets.tex")
+local tex = require("mySnippets.tex").conds
 
 autosnips = {
     s({
@@ -20,7 +20,7 @@ autosnips = {
 
     s({
         trig = "dm",
-        name = "dispaly math",
+        name = "display math",
         desc = "Insert display Math Environment.",
         hidden = true,
     }, fmt([[$$ {} $$]], { i(0) }), { condition = tex.in_text * conds_expand.line_begin }),
